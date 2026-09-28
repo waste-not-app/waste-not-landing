@@ -1,0 +1,46 @@
+:root {
+  /* Background & Surface */
+  --bg: #F4F7F2;
+  --surface: #FFFFFF;
+  --soft: #E8EFE7;
+
+  /* Text */
+  --ink: #182B20;
+  --muted: #526457;
+  --line: #738477;
+
+  /* Dividers */
+  --divider: #D9E3D8;
+
+  /* Primary */
+  --primary: #195B3D;
+  --on-primary: #FFFFFF;
+  --primary-soft: #E0EFDF;
+  --on-primary-soft: #1B4E32;
+
+  /* Accent */
+  --accent: #D2EF69;
+  --on-accent: #24390E;
+
+  /* Error */
+  --error: #A82832;
+
+  /* Gradients */
+  --gradient-pine: linear-gradient(135deg, #123F30 0%, #226948 100%);
+  --gradient-lime: linear-gradient(135deg, #EDF8BE 0%, #C9EB72 100%);
+  --gradient-cta: linear-gradient(135deg, #226948 0%, #164B35 100%);
+
+  /* Typography */
+  --font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* Border Radius */
+  --radius-badge: 8px;
+  --radius-btn: 12px;
+  --radius-card-sm: 16px;
+  --radius-card-lg: 24px;
+  --radius-pill: 999px;
+  --radius-phone: 36px;
+
+  /* Transitions */
+  --transition: 120ms ease;
+}

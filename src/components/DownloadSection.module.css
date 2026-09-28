@@ -1,0 +1,265 @@
+.section {
+  background: var(--soft);
+  padding: 96px 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary);
+  background: var(--primary-soft);
+  padding: 4px 12px;
+  border-radius: var(--radius-badge);
+}
+
+.heading {
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.5px;
+}
+
+.sub {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 440px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Versions list */
+.versionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.errorBanner {
+  padding: 12px 16px;
+  background: #FFF3F3;
+  border: 1px solid #FFCDD2;
+  border-radius: var(--radius-btn);
+  font-size: 14px;
+  color: var(--error);
+}
+
+.versionCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card-sm);
+  transition: box-shadow var(--transition);
+}
+
+.versionCard:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.versionMeta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1;
+  min-width: 0;
+}
+
+.versionBadge {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: var(--gradient-lime);
+  color: var(--on-accent);
+  border-radius: var(--radius-badge);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.versionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.versionName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.versionDetails {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.sha {
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+}
+
+.downloadBtn {
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border-radius: var(--radius-btn);
+  background: var(--gradient-cta);
+  color: var(--on-primary);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity var(--transition);
+}
+
+.downloadBtn:hover {
+  opacity: 0.88;
+}
+
+.mainDownload {
+  margin-top: 8px;
+}
+
+.mainBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 32px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-cta);
+  color: var(--on-primary);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity var(--transition), transform var(--transition);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.mainBtn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* Skeleton */
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeletonRow {
+  height: 80px;
+  border-radius: var(--radius-card-sm);
+  background: linear-gradient(90deg, var(--divider) 25%, var(--soft) 50%, var(--divider) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Install steps */
+.installSteps {
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  border-radius: var(--radius-card-lg);
+  padding: 32px;
+}
+
+.stepsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.steps {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.stepNum {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepText {
+  font-size: 15px;
+  color: var(--ink);
+  line-height: 1.6;
+  padding-top: 3px;
+}
+
+@media (max-width: 900px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .versionCard {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .downloadBtn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .mainBtn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .versionDetails {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
