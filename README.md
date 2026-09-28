@@ -1,49 +1,25 @@
-# WasteNot Landing Page
+# WasteNot landing page
 
-Halaman landing untuk aplikasi Android WasteNot — personal 3R waste tracking dengan AI detection.
+Landing page publik untuk WasteNot Android. Tampilan mengikuti [`DESIGN.md`](../wastenot-android/docs/design-kit/DESIGN.md) dan [`design-system.html`](../wastenot-android/docs/design-kit/design-system.html); pratinjau ponsel memakai data ilustrasi. APK saat ini masih build awal berisi kerangka aplikasi, sehingga halaman membedakan fitur yang direncanakan dari fitur yang sudah tersedia.
 
-🌐 **Live:** https://oktaavsm.bccdev.id/wastenot-landing/  
-📦 **Download APK:** https://oktaavsm.bccdev.id/wastenot/download  
-🤖 **Repo Android:** https://github.com/waste-not-app/waste-not-android
+**URL publik:** https://oktaavsm.bccdev.id/wastenot-app/
 
----
-
-## Stack
-
-- **React 19** + **Vite 6** + **TypeScript**
-- CSS Modules — no Tailwind, no external UI library
-- Design system: WasteNot Design Kit (Pine/Lime palette, Plus Jakarta Sans)
-
-## Development
+## Pengembangan
 
 ```bash
-npm install
-npm run dev         # http://localhost:5173
-npm run build       # output: dist/
-npm run preview     # preview production build
+npm ci
+npm run dev
+npm run build
 ```
 
-## Deployment
+Vite memakai base path `/wastenot-app/`. Font Plus Jakarta Sans disimpan lokal di `public/fonts/` beserta lisensi OFL.
 
-Otomatis via GitHub Actions saat push ke `main`:
+## Deploy
 
-1. Build `dist/`
-2. `rsync dist/` ke VM `dev@proxy.bccdev.id:/var/www/wastenot-landing/`
-3. Nginx serve di `oktaavsm.bccdev.id/wastenot-landing/`
+Push ke `main` menjalankan `.github/workflows/deploy.yml`, membangun `dist/`, lalu mengunggahnya ke `/var/www/wastenot-landing/`. Nginx menyajikan folder tersebut di `/wastenot-app/`. APK dan `versions.json` tetap dihasilkan oleh pipeline Android di `/var/www/wastenot/`, lalu disajikan di bawah prefix publik yang sama:
 
-### Required Secret
+- `/wastenot-app/download`
+- `/wastenot-app/versions.json`
+- `/wastenot-app/apk/<nama-rilis>.apk`
 
-| Secret Name | Value |
-|---|---|
-| `DEPLOY_SSH_KEY` | Private key yang sudah di-authorize di VM (`~/.ssh/wastenot_deploy_key`) |
-
-> Secret ini sama dengan yang sudah dipakai di `waste-not-android` repo.
-
-## Design System
-
-Mengikuti `docs/design-kit/DESIGN.md` dari [waste-not-android](https://github.com/waste-not-app/waste-not-android):
-
-- **Warna primary:** `#195B3D` (Pine)
-- **Aksen progres:** `#D2EF69` (Lime)  
-- **Font:** Plus Jakarta Sans (400–800)
-- **Glass dock:** backdrop-filter blur 16px
+Konfigurasi Nginx berada di server `pg-bcc` pada `/etc/nginx/sites-available/oktaavsm`. Rute publik lama `/wastenot/` dan `/wastenot-landing/` dialihkan ke halaman baru.

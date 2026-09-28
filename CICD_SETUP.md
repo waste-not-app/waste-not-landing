@@ -16,12 +16,13 @@ Pergi ke: https://github.com/waste-not-app/waste-not-landing/settings/secrets/ac
 
 Klik **New repository secret**, isi:
 
-| Field | Value |
-|---|---|
-| Name | `DEPLOY_SSH_KEY` |
+| Field  | Value                                                                                                    |
+| ------ | -------------------------------------------------------------------------------------------------------- |
+| Name   | `DEPLOY_SSH_KEY`                                                                                         |
 | Secret | Isi dengan private key dari `~/.ssh/wastenot_deploy_key` (sama dengan yang dipakai di waste-not-android) |
 
 Private key bisa dicopy dengan:
+
 ```bash
 cat ~/.ssh/wastenot_deploy_key
 ```
@@ -36,4 +37,4 @@ Setelah secret ditambahkan, setiap push ke `main` akan otomatis build & deploy k
 
 - Deploy target: `dev@proxy.bccdev.id:/var/www/wastenot-landing/` (port 11023)
 - Public key sudah ada di VM (`~/.ssh/authorized_keys`)
-- Landing page live di: https://oktaavsm.bccdev.id/wastenot-landing/
+- Landing page live di: https://oktaavsm.bccdev.id/wastenot-app/
