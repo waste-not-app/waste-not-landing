@@ -1,4 +1,4 @@
-name: Deploy Landing Page
+name: CD Staging
 
 on:
   push:
@@ -6,17 +6,16 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-landing
+  group: cd-landing-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Build & Deploy
-    runs-on: ubuntu-latest
+  build:
+    name: Build Static Site
+    runs-on: [self-hosted, landing]
     timeout-minutes: 10
-
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup Node
@@ -31,18 +30,14 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Setup SSH
+  deploy:
+    name: Deploy to Staging
+    runs-on: [self-hosted, landing]
+    needs: build
+    timeout-minutes: 10
+    steps:
+      - name: Deploy to Nginx root
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -p 11023 proxy.bccdev.id >> ~/.ssh/known_hosts 2>/dev/null || true
-
-      - name: Deploy to VM
-        run: |
-          # Upload dist to VM
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -p 11023 -o StrictHostKeyChecking=no" \
-            dist/ \
-            dev@proxy.bccdev.id:/var/www/wastenot-landing/
-          echo "Deployed successfully to oktaavsm.bccdev.id/wastenot-app/"
+          set -e
+          rsync -avz --delete dist/ /var/www/wastenot-landing/
+          echo "Deployed successfully to waste-not.bccdev.id"
