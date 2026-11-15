@@ -1189,6 +1189,7 @@ function App() {
         <div
           className={`mobile-nav-wrap${menuOpen ? " is-open" : ""}`}
           aria-hidden={!menuOpen}
+          inert={!menuOpen}
         >
           <div className="container">
             <nav className="mobile-nav" aria-label="Navigasi seluler">
