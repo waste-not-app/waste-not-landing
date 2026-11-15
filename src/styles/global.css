@@ -1023,7 +1023,7 @@ button {
    ========================================================================== */
 .phone {
   position: relative;
-  width: min(288px, 100%);
+  width: 288px;
   height: 584px;
   padding: 9px;
   border: 6px solid #172f21;
@@ -1084,7 +1084,7 @@ button {
 }
 
 .phone-body.has-dock {
-  padding-bottom: 18px;
+  padding-bottom: 8px;
 }
 
 .app-heading {
@@ -2049,12 +2049,12 @@ button {
 /* Bottom Dock & Floating Catat / Scan Pill inside Phone */
 .app-dock-wrap {
   position: relative;
-  padding-top: 14px;
+  padding-top: 26px;
 }
 
 .dock-fab {
   position: absolute;
-  top: -4px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -3069,6 +3069,9 @@ button {
 }
 
 @media (max-width: 600px) {
+  .phone {
+    width: min(288px, 100%);
+  }
   .container {
     width: min(100% - 32px, 1160px);
   }
