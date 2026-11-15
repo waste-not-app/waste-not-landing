@@ -17,6 +17,7 @@ Vite memakai base path `/`. Font Plus Jakarta Sans disimpan lokal di `public/fon
 ## Deploy
 
 Push ke `main` menjalankan `.github/workflows/deploy.yml` pada runner self-hosted landing di `alberd-staging`, membangun `dist/`, lalu menyalinnya ke `/var/www/wastenot-landing/`. Nginx menyajikan folder tersebut pada root domain.
+CI pull request juga memakai runner self-hosted berlabel `landing`, sehingga build check tidak bergantung pada kuota runner GitHub-hosted.
 
 Pipeline Android mengelola `/var/www/wastenot-apk/`. Landing membaca `/apk/versions.json` dan mengunduh `/apk/latest.apk`. File versi tertentu tersedia di `/apk/wastenot-v<VERSION>.apk`; subfolder filesystem `apk/` tidak diulang dalam URL.
 
