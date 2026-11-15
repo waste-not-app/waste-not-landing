@@ -1062,6 +1062,7 @@ function getInitialTheme(): "light" | "dark" {
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">(getInitialTheme);
   const [menuOpen, setMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
   const [activeScreen, setActiveScreen] = useState<ScreenId>("beranda");
   const [selectedAction, setSelectedAction] = useState("Recycle");
   const [heroHoverX, setHeroHoverX] = useState<number | null>(null);
@@ -1070,6 +1071,29 @@ function App() {
     document.documentElement.setAttribute("data-theme", theme);
     window.localStorage.setItem("wastenot-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handlePointerDown = (event: PointerEvent) => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setMenuOpen(false);
+      }
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [menuOpen]);
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -1135,7 +1159,7 @@ function App() {
         Lewati ke konten
       </a>
 
-      <header className="site-header">
+      <header className="site-header" ref={headerRef}>
         <div className="container header-inner">
           <a
             href="#atas"

@@ -3243,6 +3243,26 @@ button {
   .seam-can:hover .seam-can-tab {
     filter: none;
   }
+  .pillar-item {
+    touch-action: manipulation;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 180ms var(--ease-standard);
+  }
+  .pillar-item::before,
+  .pillar-badge,
+  .pillar-icon {
+    transition: none;
+  }
+  .pillar-icon svg {
+    transition: transform 240ms var(--ease-standard);
+  }
+  .pillar-item:hover {
+    transform: none;
+  }
+  .pillar-item:active {
+    transform: scale(0.99);
+  }
   .k-char:hover,
   .k-char:has(+ .k-char:hover),
   .k-char:hover + .k-char {
