@@ -15,20 +15,20 @@ const base = "/wastenot-app/";
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
     <span className="btn-arrow" aria-hidden="true">
-      <svg viewBox="0 0 16 16" fill="none">
+      <svg viewBox="0 0 18 18" fill="none">
         {diagonal ? (
           <path
-            d="M4.5 11.5 11.5 4.5M5.75 4.5h5.75v5.75"
+            d="M4.5 13.5 13.5 4.5M6.5 4.5h7v7"
             stroke="currentColor"
-            strokeWidth="1.85"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
         ) : (
           <path
-            d="M3 8h10M9 4l4 4-4 4"
+            d="M3.5 9h11M10 4.5 14.5 9 10 13.5"
             stroke="currentColor"
-            strokeWidth="1.85"
+            strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
