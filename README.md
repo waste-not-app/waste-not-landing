@@ -21,3 +21,18 @@ Push ke `main` menjalankan `.github/workflows/deploy.yml` pada runner self-hoste
 Pipeline Android mengelola `/var/www/wastenot-apk/`. Landing membaca `/apk/versions.json` dan mengunduh `/apk/latest.apk`. File versi tertentu tersedia di `/apk/wastenot-v<VERSION>.apk`; subfolder filesystem `apk/` tidak diulang dalam URL.
 
 Konfigurasi Nginx berada di `alberd-staging` pada `/etc/nginx/sites-available/waste-not`. Frontend lama di `pg-bcc` mengalihkan pengguna ke domain baru.
+
+Untuk halaman `/apk/`, gunakan lokasi exact dengan root distribusi:
+
+```nginx
+location = /apk/ {
+    root /var/www/wastenot-apk;
+    try_files /index.html =404;
+}
+```
+
+Jangan memakai alias langsung ke file `index.html` pada URI yang berakhiran `/`:
+modul index Nginx dapat membentuk `index.htmlindex.html` dan menghasilkan HTTP 500.
+Setelah perubahan, jalankan `sudo nginx -t` sebelum reload. Verifikasi `/apk/`
+mengembalikan HTML 200, `/apk/versions.json` memuat versi terbaru, dan tautan
+`download_url` mengunduh APK, bukan halaman HTML.
