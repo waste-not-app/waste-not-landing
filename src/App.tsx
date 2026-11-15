@@ -57,7 +57,7 @@ function Brand() {
     <span className="brand">
       <span className="brand-mark" aria-hidden="true">
         <img
-          src="/images/wastenot-logo.png"
+          src="/images/wastenot-logo.webp"
           alt=""
           loading="eager"
           decoding="async"
@@ -443,7 +443,7 @@ function AndroidScreen({
 
             <div className="ai-viewfinder is-scanning">
               <img
-                src="/images/waste-materials.jpg"
+                src="/images/waste-materials.webp"
                 alt="Pratinjau kamera untuk memindai material sampah"
                 loading="lazy"
                 decoding="async"
@@ -723,7 +723,7 @@ function AndroidScreen({
 
             <div className="guide-list-item">
               <img
-                src="/images/waste-materials.jpg"
+                src="/images/waste-materials.webp"
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -738,7 +738,7 @@ function AndroidScreen({
             </div>
             <div className="guide-list-item">
               <img
-                src="/images/hero-sorting.jpg"
+                src="/images/hero-sorting.webp"
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -753,7 +753,7 @@ function AndroidScreen({
             </div>
             <div className="guide-list-item">
               <img
-                src="/images/waste-organic.jpg"
+                src="/images/waste-organic.webp"
                 alt=""
                 loading="lazy"
                 decoding="async"
@@ -1327,14 +1327,14 @@ function App() {
           <div className="seam-photo seam-photo-right seam-bottle" aria-hidden="true">
             <img
               className="seam-bottle-body"
-              src="/images/seam-bottle-body.png"
+              src="/images/seam-bottle-body.webp"
               alt=""
               loading="lazy"
               decoding="async"
             />
             <img
               className="seam-bottle-cap"
-              src="/images/seam-bottle-cap.png"
+              src="/images/seam-bottle-cap.webp"
               alt=""
               loading="lazy"
               decoding="async"
@@ -1359,7 +1359,7 @@ function App() {
               >
                 <div className="editorial-media">
                   <img
-                    src="/images/card-ai-bottle.jpg"
+                    src="/images/card-ai-bottle.webp"
                     alt="Ponsel memindai botol plastik PET di atas meja untuk dikenali AI"
                     loading="lazy"
                     decoding="async"
@@ -1422,7 +1422,7 @@ function App() {
               >
                 <div className="editorial-media">
                   <img
-                    src="/images/hero-sorting.jpg"
+                    src="/images/hero-sorting.webp"
                     alt="Penerapan 3R di rumah: botol plastik dan toples kaca bersih terpilah di samping wadah pilah Paper, Plastic, Glass serta tas belanja kain"
                     loading="lazy"
                     decoding="async"
@@ -1445,21 +1445,21 @@ function App() {
           <div className="seam-photo seam-photo-left seam-box" aria-hidden="true">
             <img
               className="seam-box-body"
-              src="/images/seam-box-body.png"
+              src="/images/seam-box-body.webp"
               alt=""
               loading="lazy"
               decoding="async"
             />
             <img
               className="seam-box-flap-left"
-              src="/images/seam-box-flap-left.png"
+              src="/images/seam-box-flap-left.webp"
               alt=""
               loading="lazy"
               decoding="async"
             />
             <img
               className="seam-box-flap-right"
-              src="/images/seam-box-flap-right.png"
+              src="/images/seam-box-flap-right.webp"
               alt=""
               loading="lazy"
               decoding="async"
@@ -1588,7 +1588,7 @@ function App() {
           <div className="seam-photo seam-photo-right seam-can" aria-hidden="true">
             <img
               className="seam-can-body"
-              src="/images/seam-can-wastenot.png"
+              src="/images/seam-can-wastenot.webp"
               alt=""
               loading="lazy"
               decoding="async"
@@ -1596,7 +1596,7 @@ function App() {
             <span className="seam-can-opening" />
             <img
               className="seam-can-tab"
-              src="/images/seam-can-tab.png"
+              src="/images/seam-can-tab.webp"
               alt=""
               loading="lazy"
               decoding="async"
@@ -1630,7 +1630,7 @@ function App() {
                 >
                   <div className="download-card-head">
                     <img
-                      src="/images/wastenot-logo.png"
+                      src="/images/wastenot-logo.webp"
                       alt=""
                       className="download-app-icon"
                       loading="lazy"
