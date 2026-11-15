@@ -10,8 +10,6 @@ type ScreenId =
   | "panduan"
   | "statistik";
 
-const base = "/wastenot-app/";
-
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
     <span className="btn-arrow" aria-hidden="true">
@@ -1003,7 +1001,7 @@ function ReleaseInfo() {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${base}apk/versions.json`, { signal: controller.signal })
+    fetch("/apk/versions.json", { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error("Metadata rilis tidak tersedia");
         return response.json();
@@ -1736,7 +1734,7 @@ function App() {
                   <ReleaseInfo />
                   <a
                     className="button button-lime"
-                    href={`${base}apk/apk/latest.apk`}
+                    href="/apk/latest.apk"
                     download="WasteNot-latest.apk"
                   >
                     Unduh aplikasi Android <Arrow diagonal />
