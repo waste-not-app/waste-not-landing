@@ -1194,7 +1194,6 @@ function App() {
 
           <nav className="desktop-nav" aria-label="Navigasi utama">
             <a href="#antarmuka">Antarmuka & AI</a>
-            <a href={`${base}demo/`}>Demo AI</a>
             <a href="#manfaat">Manfaat</a>
             <a href="#tentang">Tentang aplikasi</a>
           </nav>
@@ -1289,8 +1288,12 @@ function App() {
                 hari.
               </p>
               <div className="hero-actions">
-                <a className="button button-primary" href={`${base}demo/`}>
-                  Coba Demo AI Langsung <Arrow diagonal />
+                <a
+                  className="button button-primary"
+                  href="#antarmuka"
+                  onClick={() => setActiveScreen("ai")}
+                >
+                  Coba demo AI & antarmuka <Arrow diagonal />
                 </a>
                 <a className="text-link" href="#unduh">
                   Unduh untuk Android <Arrow />
