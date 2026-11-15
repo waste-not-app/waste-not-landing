@@ -1167,10 +1167,11 @@ function App() {
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 {menuOpen ? (
                   <path
-                    d="M6 6l12 12M18 6 6 18"
+                    d="M6 15l6-6 6 6"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="2.1"
                     strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 ) : (
                   <path
@@ -1185,24 +1186,43 @@ function App() {
           </div>
         </div>
 
-        {menuOpen && (
+        <div
+          className={`mobile-nav-wrap${menuOpen ? " is-open" : ""}`}
+          aria-hidden={!menuOpen}
+        >
           <div className="container">
             <nav className="mobile-nav" aria-label="Navigasi seluler">
-              <a href="#antarmuka" onClick={() => setMenuOpen(false)}>
+              <a
+                href="#antarmuka"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => setMenuOpen(false)}
+              >
                 Antarmuka & AI
               </a>
-              <a href="#manfaat" onClick={() => setMenuOpen(false)}>
+              <a
+                href="#manfaat"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => setMenuOpen(false)}
+              >
                 Manfaat
               </a>
-              <a href="#tentang" onClick={() => setMenuOpen(false)}>
+              <a
+                href="#tentang"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => setMenuOpen(false)}
+              >
                 Tentang aplikasi
               </a>
-              <a href="#unduh" onClick={() => setMenuOpen(false)}>
+              <a
+                href="#unduh"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => setMenuOpen(false)}
+              >
                 Unduh aplikasi
               </a>
             </nav>
           </div>
-        )}
+        </div>
       </header>
 
       <main id="main">
