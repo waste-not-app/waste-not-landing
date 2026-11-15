@@ -13,7 +13,29 @@ type ScreenId =
 const base = "/wastenot-app/";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
-  return <span aria-hidden="true">{diagonal ? "↗" : "→"}</span>;
+  return (
+    <span className="btn-arrow" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none">
+        {diagonal ? (
+          <path
+            d="M4.5 11.5 11.5 4.5M5.75 4.5h5.75v5.75"
+            stroke="currentColor"
+            strokeWidth="1.85"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        ) : (
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="currentColor"
+            strokeWidth="1.85"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        )}
+      </svg>
+    </span>
+  );
 }
 
 function KineticText({
