@@ -2697,6 +2697,10 @@ button {
   transform: rotate(120deg);
 }
 
+.pillar-trash:hover .pillar-icon svg {
+  transform: translateY(-2px) scale(1.06);
+}
+
 .pillar-item.is-accent .pillar-icon {
   background: var(--primary-soft);
   border-color: var(--divider);

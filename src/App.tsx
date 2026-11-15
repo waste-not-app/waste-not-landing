@@ -1026,7 +1026,7 @@ const simulatorTabs: {
   {
     id: "ai",
     title: "Pindai sampah dengan AI",
-    desc: "Arahkan kamera ke material sampah untuk mengenali jenis, perkiraan berat, dan saran 3R secara otomatis.",
+    desc: "Arahkan kamera ke material sampah untuk mengenali jenis, perkiraan berat, dan saran 3R atau Trash secara otomatis.",
   },
   {
     id: "catat",
@@ -1036,11 +1036,11 @@ const simulatorTabs: {
   {
     id: "riwayat",
     title: "Riwayat yang mudah ditelusuri",
-    desc: "Lihat kembali catatan harianmu lengkap dengan kategori 3R dan waktu pencatatan.",
+    desc: "Lihat kembali catatan harianmu lengkap dengan kategori 3R & Trash serta waktu pencatatan.",
   },
   {
     id: "panduan",
-    title: "Panduan pemilahan 3R",
+    title: "Panduan pemilahan 3R & Trash",
     desc: "Referensi singkat untuk mengenali material dan langkah penanganan yang tepat tanpa menghakimi.",
   },
   {
@@ -1262,7 +1262,7 @@ function App() {
               </h1>
               <p className="hero-lede">
                 Catat sampah yang kamu tangani, kenali materialnya dengan AI,
-                pahami pilihan 3R, dan lihat kebiasaanmu berkembang dari hari ke
+                pahami pilihan 3R hingga Trash, dan lihat kebiasaanmu berkembang dari hari ke
                 hari.
               </p>
               <div className="hero-actions">
@@ -1625,6 +1625,31 @@ function App() {
                   <p>Memilah material bersih agar lebih mudah didaur ulang.</p>
                 </div>
               </div>
+
+              <div
+                className="pillar-item pillar-trash"
+                data-reveal="right"
+                style={{ "--reveal-delay": "330ms" } as CSSProperties}
+              >
+                <span className="pillar-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M4.5 7h15M9.5 7V5a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v2M7 7l1 12a1.5 1.5 0 0 0 1.5 1.4h5A1.5 1.5 0 0 0 16 19l1-12"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+                <div className="pillar-body">
+                  <div className="pillar-head">
+                    <h3>Buang residu dengan tepat</h3>
+                    <span className="pillar-badge">Trash</span>
+                  </div>
+                  <p>Mencatat sampah residu yang tidak bisa didaur ulang secara jujur.</p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -1659,12 +1684,12 @@ function App() {
                   </h2>
                   <p>
                     Catat sampah harian, pindai material dengan AI, pelajari
-                    panduan 3R, dan pantau progres kebiasaanmu langsung dari
+                    panduan 3R &amp; Trash, dan pantau progres kebiasaanmu langsung dari
                     ponsel.
                   </p>
                   <div className="download-highlights">
                     <span>Kamera &amp; scan AI</span>
-                    <span>Catatan 3R lengkap</span>
+                    <span>Catatan 3R &amp; Trash lengkap</span>
                     <span>Statistik 7 &amp; 30 hari</span>
                   </div>
                 </div>
@@ -1711,7 +1736,7 @@ function App() {
             <Brand />
             <p className="footer-tagline">Catat. Pahami. Lanjutkan.</p>
             <p className="footer-note">
-              Ruang pribadi untuk mencatat kebiasaan pilah sampah 3R harian di
+              Ruang pribadi untuk mencatat kebiasaan pilah sampah 3R &amp; Trash harian di
               Android.
             </p>
           </div>
@@ -1726,12 +1751,12 @@ function App() {
               </nav>
             </div>
             <div className="footer-col">
-              <strong>Fokus 3R</strong>
+              <strong>Fokus 3R &amp; Trash</strong>
               <ul>
                 <li>Reduce · Kurangi</li>
                 <li>Reuse · Pakai ulang</li>
                 <li>Recycle · Daur ulang</li>
-                <li>Kamera &amp; scan AI</li>
+                <li>Trash · Buang residu</li>
               </ul>
             </div>
           </div>
