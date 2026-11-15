@@ -981,7 +981,7 @@ function ReleaseInfo() {
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${base}versions.json`, { signal: controller.signal })
+    fetch(`${base}apk/versions.json`, { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error("Metadata rilis tidak tersedia");
         return response.json();
@@ -1687,7 +1687,11 @@ function App() {
                     </div>
                   </div>
                   <ReleaseInfo />
-                  <a className="button button-lime" href={`${base}download`}>
+                  <a
+                    className="button button-lime"
+                    href={`${base}apk/apk/latest.apk`}
+                    download="WasteNot-latest.apk"
+                  >
                     Unduh aplikasi Android <Arrow diagonal />
                   </a>
                   <small>
