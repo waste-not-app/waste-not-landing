@@ -188,10 +188,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
   overflow-anchor: none;
 }
 
 body {
+  overflow-x: clip;
   overflow-anchor: none;
   margin: 0;
   min-width: 320px;
@@ -977,7 +979,7 @@ button {
    ========================================================================== */
 .phone {
   position: relative;
-  width: 288px;
+  width: min(288px, 100%);
   height: 584px;
   padding: 9px;
   border: 6px solid #172f21;
@@ -3008,18 +3010,58 @@ button {
   .container {
     width: min(100% - 32px, 1160px);
   }
+  .site-header {
+    padding: 8px 0;
+  }
+  .header-inner {
+    min-height: 60px;
+    gap: 8px;
+  }
   .header-cta {
+    min-height: 40px;
     padding: 0 var(--space-3);
     font-size: 13px;
   }
+  .theme-toggle,
+  .menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
   .hero {
-    padding: 48px 0 64px;
+    padding: 36px 0 64px;
+  }
+  .hero-centered h1 {
+    font-size: clamp(30px, 8.6vw, 42px);
+    line-height: 1.12;
+  }
+  .hero-lede {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .hero-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-3);
   }
   .hero-trio {
-    margin-top: 36px;
+    margin-top: 32px;
+  }
+  .hero-w-backdrop {
+    width: 145vw;
+    top: 44%;
+    opacity: 0.34;
   }
   .section {
-    padding: 72px 0;
+    padding: 64px 0;
+  }
+  .showcase-grid,
+  .about-grid,
+  .download-grid {
+    gap: var(--space-6);
+  }
+  .switcher-item {
+    padding: 14px;
+    gap: 12px;
   }
   .editorial-cards {
     grid-template-columns: 1fr;
@@ -3027,18 +3069,39 @@ button {
   .editorial-card:last-child {
     grid-column: auto;
   }
+  .pillar-item {
+    padding: 16px;
+    gap: 12px;
+  }
+  .pillar-icon {
+    width: 42px;
+    height: 42px;
+  }
+  .pillar-head {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
   .download-section {
-    padding: 72px 0;
+    padding: 64px 0;
   }
   .download-shell {
-    padding: var(--space-6);
+    padding: 0;
   }
   .download-card {
-    padding: var(--space-6);
+    padding: var(--space-5);
+  }
+  .download-highlights {
+    gap: 10px 18px;
   }
   .footer-top {
     flex-direction: column;
+    gap: var(--space-6);
     padding: var(--space-8) 0 var(--space-6);
+  }
+  .footer-cols {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 24px 40px;
   }
   .footer nav {
     flex-wrap: wrap;
@@ -3048,15 +3111,29 @@ button {
     flex-direction: column;
     gap: var(--space-1);
   }
+  [data-reveal="left"] {
+    transform: translateY(24px);
+  }
+  [data-reveal="right"] {
+    transform: translateY(24px);
+  }
 }
 
-@media (max-width: 380px) {
+@media (max-width: 400px) {
   .header-cta {
     display: none;
   }
   .hero-actions {
     flex-direction: column;
-    gap: var(--space-4);
+    align-items: stretch;
+  }
+  .hero-actions .button,
+  .hero-actions .text-link {
+    justify-content: center;
+  }
+  .footer-cols {
+    flex-direction: column;
+    gap: 20px;
   }
 }
 
