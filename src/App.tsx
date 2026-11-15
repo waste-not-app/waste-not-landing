@@ -1768,6 +1768,7 @@ function App() {
                 <a href="#manfaat">Manfaat</a>
                 <a href="#tentang">Tentang</a>
                 <a href="#unduh">Unduh Android</a>
+                <a href="/privacy/">Kebijakan privasi</a>
               </nav>
             </div>
             <div className="footer-col">
