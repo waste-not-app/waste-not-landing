@@ -57,7 +57,7 @@ function Brand() {
     <span className="brand">
       <span className="brand-mark" aria-hidden="true">
         <img
-          src="/images/wastenot-logo.webp"
+          src="/images/wastenot-brand.webp"
           alt=""
           loading="eager"
           decoding="async"
@@ -1630,7 +1630,7 @@ function App() {
                 >
                   <div className="download-card-head">
                     <img
-                      src="/images/wastenot-logo.webp"
+                      src="/images/wastenot-brand.webp"
                       alt=""
                       className="download-app-icon"
                       loading="lazy"
