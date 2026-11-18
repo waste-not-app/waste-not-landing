@@ -3,12 +3,7 @@ import "./styles/global.css";
 
 type Release = { version: string; size: string; date: string };
 type ScreenId =
-  | "beranda"
-  | "ai"
-  | "catat"
-  | "riwayat"
-  | "panduan"
-  | "statistik";
+  "beranda" | "ai" | "catat" | "riwayat" | "panduan" | "statistik";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
@@ -36,13 +31,7 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   );
 }
 
-function KineticText({
-  text,
-  accent,
-}: {
-  text: string;
-  accent?: string;
-}) {
+function KineticText({ text, accent }: { text: string; accent?: string }) {
   const renderChars = (str: string, isAccent = false) =>
     str.split(" ").map((word, wIdx, arr) => (
       <span key={`${word}-${wIdx}`} className="k-word">
@@ -88,11 +77,7 @@ function Brand() {
   );
 }
 
-function HeroWBackdrop({
-  hoverX,
-}: {
-  hoverX: number | null;
-}) {
+function HeroWBackdrop({ hoverX }: { hoverX: number | null }) {
   const targetRef = useRef({ x: 0.5, weight: 0 });
   const currentRef = useRef({ x: 0.5, weight: 0 });
   const rafRef = useRef<number | null>(null);
@@ -147,7 +132,10 @@ function HeroWBackdrop({
     const dist = Math.abs(motion.x - cx);
     if (dist >= radius) return 0;
     // Smooth cosine bell * global fade-in/out weight
-    return Math.pow(0.5 * (1 + Math.cos((dist / radius) * Math.PI)), 1.3) * motion.weight;
+    return (
+      Math.pow(0.5 * (1 + Math.cos((dist / radius) * Math.PI)), 1.3) *
+      motion.weight
+    );
   };
 
   // Exact 773x546 proportions matching wastenot-w-mark.png; all joints stay coupled
@@ -171,19 +159,40 @@ function HeroWBackdrop({
     <div className="hero-w-backdrop" aria-hidden="true">
       <svg viewBox="0 0 773 546" fill="none" className="hero-w-svg">
         <defs>
-          <linearGradient id="wnLeafGrad" x1="40" y1="300" x2="410" y2="30" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="wnLeafGrad"
+            x1="40"
+            y1="300"
+            x2="410"
+            y2="30"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#1D6149" />
             <stop offset="48%" stopColor="#69B832" />
             <stop offset="100%" stopColor="#A6E244" />
           </linearGradient>
-          <linearGradient id="wnRibbonGrad" x1="80" y1="450" x2="730" y2="140" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="wnRibbonGrad"
+            x1="80"
+            y1="450"
+            x2="730"
+            y2="140"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#1D6149" />
             <stop offset="28%" stopColor="#69B832" />
             <stop offset="56%" stopColor="#9EDB3A" />
             <stop offset="82%" stopColor="#267355" />
             <stop offset="100%" stopColor="#123F30" />
           </linearGradient>
-          <linearGradient id="wnFoldGrad" x1="360" y1="290" x2="640" y2="490" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="wnFoldGrad"
+            x1="360"
+            y1="290"
+            x2="640"
+            y2="490"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop offset="0%" stopColor="#123F30" />
             <stop offset="100%" stopColor="#1D6149" />
           </linearGradient>
@@ -295,10 +304,39 @@ function AndroidScreen({
         <span>9:41</span>
         <span className="phone-status" aria-hidden="true">
           <svg viewBox="0 0 16 12" fill="none">
-            <rect x="1" y="7" width="2.2" height="4" rx="0.8" fill="currentColor" />
-            <rect x="4.8" y="5" width="2.2" height="6" rx="0.8" fill="currentColor" />
-            <rect x="8.6" y="3" width="2.2" height="8" rx="0.8" fill="currentColor" />
-            <rect x="12.4" y="1" width="2.2" height="10" rx="0.8" fill="currentColor" opacity="0.35" />
+            <rect
+              x="1"
+              y="7"
+              width="2.2"
+              height="4"
+              rx="0.8"
+              fill="currentColor"
+            />
+            <rect
+              x="4.8"
+              y="5"
+              width="2.2"
+              height="6"
+              rx="0.8"
+              fill="currentColor"
+            />
+            <rect
+              x="8.6"
+              y="3"
+              width="2.2"
+              height="8"
+              rx="0.8"
+              fill="currentColor"
+            />
+            <rect
+              x="12.4"
+              y="1"
+              width="2.2"
+              height="10"
+              rx="0.8"
+              fill="currentColor"
+              opacity="0.35"
+            />
           </svg>
           <svg viewBox="0 0 20 12" fill="none">
             <rect
@@ -310,8 +348,20 @@ function AndroidScreen({
               stroke="currentColor"
               strokeWidth="1.4"
             />
-            <rect x="2.8" y="3.3" width="10.2" height="5.4" rx="1.1" fill="currentColor" />
-            <path d="M17.5 4.3v3.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            <rect
+              x="2.8"
+              y="3.3"
+              width="10.2"
+              height="5.4"
+              rx="1.1"
+              fill="currentColor"
+            />
+            <path
+              d="M17.5 4.3v3.4"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
           </svg>
         </span>
       </div>
@@ -326,7 +376,13 @@ function AndroidScreen({
               </div>
               <span className="avatar-square" aria-hidden="true">
                 <svg viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="7.5" r="3" stroke="currentColor" strokeWidth="1.6" />
+                  <circle
+                    cx="10"
+                    cy="7.5"
+                    r="3"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  />
                   <path
                     d="M4.8 16.2c.9-2.4 2.8-3.7 5.2-3.7s4.3 1.3 5.2 3.7"
                     stroke="currentColor"
@@ -553,7 +609,9 @@ function AndroidScreen({
                   <>
                     <span className="method-radio-top">
                       <strong>{m.id}</strong>
-                      <span className={`method-radio-dot${active ? " is-checked" : ""}`} />
+                      <span
+                        className={`method-radio-dot${active ? " is-checked" : ""}`}
+                      />
                     </span>
                     <small>{m.sub}</small>
                   </>
@@ -809,7 +867,9 @@ function AndroidScreen({
               <strong>
                 1,4 <small>kg</small>
               </strong>
-              <span className="summary-sub">5 aktivitas · 0 benda ditangani</span>
+              <span className="summary-sub">
+                5 aktivitas · 0 benda ditangani
+              </span>
             </div>
 
             <div className="lime-highlight-card">
@@ -871,7 +931,13 @@ function AndroidScreen({
                   stroke="currentColor"
                   strokeWidth="1.6"
                 />
-                <circle cx="10" cy="11" r="2.6" stroke="currentColor" strokeWidth="1.6" />
+                <circle
+                  cx="10"
+                  cy="11"
+                  r="2.6"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
               </svg>
               <span>Catat / Scan</span>
             </button>
@@ -883,7 +949,13 @@ function AndroidScreen({
                   stroke="currentColor"
                   strokeWidth="1.6"
                 />
-                <circle cx="10" cy="11" r="2.6" stroke="currentColor" strokeWidth="1.6" />
+                <circle
+                  cx="10"
+                  cy="11"
+                  r="2.6"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                />
               </svg>
               <span>Catat / Scan</span>
             </span>
@@ -953,7 +1025,13 @@ function AndroidScreen({
                   )}
                   {tab.icon === "user" && (
                     <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                      <circle cx="10" cy="7.5" r="3" stroke="currentColor" strokeWidth="1.6" />
+                      <circle
+                        cx="10"
+                        cy="7.5"
+                        r="3"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
                       <path
                         d="M5 16c.8-2.2 2.6-3.4 5-3.4s4.2 1.2 5 3.4"
                         stroke="currentColor"
@@ -1139,7 +1217,7 @@ function App() {
     }
 
     const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
+      "(prefers-reduced-motion: reduce)",
     ).matches;
     if (prefersReduced || typeof IntersectionObserver === "undefined") {
       targets.forEach((el) => el.classList.add("is-visible"));
@@ -1158,7 +1236,7 @@ function App() {
           }
         });
       },
-      { threshold: 0.14, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.14, rootMargin: "0px 0px -60px 0px" },
     );
 
     targets.forEach((el) => observer.observe(el));
@@ -1282,8 +1360,8 @@ function App() {
               </h1>
               <p className="hero-lede">
                 Catat sampah yang kamu tangani, kenali materialnya dengan AI,
-                pahami pilihan 3R hingga Trash, dan lihat kebiasaanmu berkembang dari hari ke
-                hari.
+                pahami pilihan 3R hingga Trash, dan lihat kebiasaanmu berkembang
+                dari hari ke hari.
               </p>
               <div className="hero-actions">
                 <a
@@ -1389,7 +1467,10 @@ function App() {
         </section>
 
         <section className="section benefits" id="manfaat">
-          <div className="seam-photo seam-photo-right seam-bottle" aria-hidden="true">
+          <div
+            className="seam-photo seam-photo-right seam-bottle"
+            aria-hidden="true"
+          >
             <img
               className="seam-bottle-body"
               src="/images/seam-bottle-body.webp"
@@ -1413,7 +1494,9 @@ function App() {
               <h2 aria-label="Lebih mudah peduli saat semuanya terasa jelas.">
                 <KineticText text="Lebih mudah peduli saat semuanya terasa jelas." />
               </h2>
-              <p>Tiga kemampuan inti yang membuat kebiasaan baik terasa ringan.</p>
+              <p>
+                Tiga kemampuan inti yang membuat kebiasaan baik terasa ringan.
+              </p>
             </div>
 
             <div className="editorial-cards">
@@ -1507,7 +1590,10 @@ function App() {
         </section>
 
         <section className="section about" id="tentang">
-          <div className="seam-photo seam-photo-left seam-box" aria-hidden="true">
+          <div
+            className="seam-photo seam-photo-left seam-box"
+            aria-hidden="true"
+          >
             <img
               className="seam-box-body"
               src="/images/seam-box-body.webp"
@@ -1557,7 +1643,13 @@ function App() {
               >
                 <span className="pillar-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.75" />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="8.5"
+                      stroke="currentColor"
+                      strokeWidth="1.75"
+                    />
                     <path
                       d="M8.5 12h7"
                       stroke="currentColor"
@@ -1603,7 +1695,10 @@ function App() {
                     <h3>Pakai ulang lebih lama</h3>
                     <span className="pillar-badge">Reuse</span>
                   </div>
-                  <p>Memakai ulang wadah, kemasan, atau sisa organik untuk kompos.</p>
+                  <p>
+                    Memakai ulang wadah, kemasan, atau sisa organik untuk
+                    kompos.
+                  </p>
                 </div>
               </div>
 
@@ -1667,7 +1762,10 @@ function App() {
                     <h3>Buang residu dengan tepat</h3>
                     <span className="pillar-badge">Trash</span>
                   </div>
-                  <p>Mencatat sampah residu yang tidak bisa didaur ulang secara jujur.</p>
+                  <p>
+                    Mencatat sampah residu yang tidak bisa didaur ulang secara
+                    jujur.
+                  </p>
                 </div>
               </div>
             </div>
@@ -1675,7 +1773,10 @@ function App() {
         </section>
 
         <section className="download-section" id="unduh">
-          <div className="seam-photo seam-photo-right seam-can" aria-hidden="true">
+          <div
+            className="seam-photo seam-photo-right seam-can"
+            aria-hidden="true"
+          >
             <img
               className="seam-can-body"
               src="/images/seam-can-wastenot.webp"
@@ -1704,8 +1805,8 @@ function App() {
                   </h2>
                   <p>
                     Catat sampah harian, pindai material dengan AI, pelajari
-                    panduan 3R &amp; Trash, dan pantau progres kebiasaanmu langsung dari
-                    ponsel.
+                    panduan 3R &amp; Trash, dan pantau progres kebiasaanmu
+                    langsung dari ponsel.
                   </p>
                   <div className="download-highlights">
                     <span>Kamera &amp; scan AI</span>
@@ -1756,8 +1857,8 @@ function App() {
             <Brand />
             <p className="footer-tagline">Catat. Pahami. Lanjutkan.</p>
             <p className="footer-note">
-              Ruang pribadi untuk mencatat kebiasaan pilah sampah 3R &amp; Trash harian di
-              Android.
+              Ruang pribadi untuk mencatat kebiasaan pilah sampah 3R &amp; Trash
+              harian di Android.
             </p>
           </div>
           <div className="footer-cols">
