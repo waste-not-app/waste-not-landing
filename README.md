@@ -1,27 +1,48 @@
-# WasteNot landing page
+# WasteNot Landing Page
 
-Landing page publik untuk WasteNot Android. Tampilan mengikuti [`DESIGN.md`](../wastenot-android/docs/design-kit/DESIGN.md) dan [`design-system.html`](../wastenot-android/docs/design-kit/design-system.html); pratinjau ponsel memakai data ilustrasi. APK saat ini masih build awal berisi kerangka aplikasi, sehingga halaman membedakan fitur yang direncanakan dari fitur yang sudah tersedia.
+Landing page publik untuk aplikasi Android WasteNot, dibangun dengan React 19, TypeScript, dan Vite 8. Tampilan mengikuti [DESIGN.md](https://github.com/waste-not-app/waste-not-android/blob/main/docs/design-kit/DESIGN.md) dari repo Android. Pratinjau ponsel memakai data ilustrasi, dan halaman membedakan fitur yang sudah tersedia dari yang masih direncanakan.
 
-**URL publik:** https://waste-not.bccdev.id/
+**URL publik:** <https://waste-not.bccdev.id/>
 
 ## Pengembangan
 
-```bash
-npm ci
-npm run dev
-npm run build
+Prasyarat: Node.js 22.12+ (lihat `.nvmrc`, disarankan 24) dan npm.
+
+```sh
+make install   # npm ci
+make dev       # Vite dev server
+make check     # format, lint, audit, type-check, build
 ```
 
-Vite memakai base path `/`. Font Plus Jakarta Sans disimpan lokal di `public/fonts/` beserta lisensi OFL.
+| Target / script | Fungsi |
+|---|---|
+| `make dev` / `npm run dev` | Dev server dengan HMR |
+| `make build` / `npm run build` | Type-check (`tsc -b`) lalu build ke `dist/` |
+| `make fmt` / `npm run format` | Format dengan Prettier |
+| `make lint` / `npm run lint` | ESLint (typescript-eslint, react-hooks) |
+| `make audit` | `npm audit` level high ke atas |
+| `make check` / `npm run check` | Gate kualitas lengkap |
 
-## Deploy
+Vite memakai base path `/`. Font Plus Jakarta Sans disimpan lokal di `public/fonts/` beserta lisensi OFL. Data unduhan APK diambil dari `/apk/versions.json` pada origin yang sama.
 
-Push ke `main` menjalankan `.github/workflows/deploy.yml` pada runner self-hosted landing di `alberd-staging`, membangun `dist/`, lalu menyalinnya ke `/var/www/wastenot-landing/`. Nginx menyajikan folder tersebut pada root domain.
-CI pull request juga memakai runner self-hosted berlabel `landing`, sehingga build check tidak bergantung pada kuota runner GitHub-hosted.
+## Docker
 
-Pipeline Android mengelola `/var/www/wastenot-apk/`. Landing membaca `/apk/versions.json` dan mengunduh `/apk/latest.apk`. File versi tertentu tersedia di `/apk/wastenot-v<VERSION>.apk`; subfolder filesystem `apk/` tidak diulang dalam URL.
+```sh
+make up     # build image lalu sajikan di http://127.0.0.1:8081
+make down
+```
 
-Konfigurasi Nginx berada di `alberd-staging` pada `/etc/nginx/sites-available/waste-not`. Frontend lama di `pg-bcc` mengalihkan pengguna ke domain baru.
+Image produksi dibangun multi-stage: Node 24 untuk build, lalu `nginx-unprivileged` (port 8080, nonroot, filesystem read-only). Konfigurasi di `deploy/nginx.conf` mengatur fallback SPA, cache jangka panjang untuk `/assets/`, endpoint `/healthz`, dan header keamanan di `deploy/security-headers.conf` (CSP ketat tanpa script inline, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`). Gunakan header yang sama pada Nginx staging.
+
+## CI/CD
+
+- **CI** (`.github/workflows/ci.yml`) berjalan di setiap push dan pull request pada runner self-hosted `landing`: `npm ci`, `npm audit`, lalu `npm run check`.
+- **CD** (`.github/workflows/deploy.yml`) hanya berjalan setelah CI di `main` sukses. Build dan publikasi berada dalam satu job, lalu `rsync` ke `/var/www/wastenot-landing/` dan memeriksa `index.html` serta `privacy/index.html`. Tidak ada secret yang dibutuhkan karena runner berada di host yang sama dengan Nginx.
+- Dependabot memperbarui npm, GitHub Actions, dan base image setiap minggu.
+
+## Nginx staging dan APK
+
+Konfigurasi Nginx berada di `alberd-staging` pada `/etc/nginx/sites-available/waste-not`. Pipeline Android mengelola `/var/www/wastenot-apk/`. Landing membaca `/apk/versions.json` dan mengunduh `/apk/latest.apk`; versi tertentu tersedia di `/apk/wastenot-v<VERSION>.apk`.
 
 Untuk halaman `/apk/`, gunakan lokasi exact dengan root distribusi:
 
@@ -32,11 +53,7 @@ location = /apk/ {
 }
 ```
 
-Jangan memakai alias langsung ke file `index.html` pada URI yang berakhiran `/`:
-modul index Nginx dapat membentuk `index.htmlindex.html` dan menghasilkan HTTP 500.
-Setelah perubahan, jalankan `sudo nginx -t` sebelum reload. Verifikasi `/apk/`
-mengembalikan HTML 200, `/apk/versions.json` memuat versi terbaru, dan tautan
-`download_url` mengunduh APK, bukan halaman HTML.
+Jangan memakai alias langsung ke file `index.html` pada URI yang berakhiran `/`, karena modul index Nginx dapat membentuk `index.htmlindex.html` dan menghasilkan HTTP 500. Jalankan `sudo nginx -t` sebelum reload, lalu pastikan `/apk/` mengembalikan HTML 200, `/apk/versions.json` memuat versi terbaru, dan `download_url` mengunduh APK.
 
 ## Kebijakan privasi publik
 
