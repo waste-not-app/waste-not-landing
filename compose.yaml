@@ -1,0 +1,13 @@
+name: wastenot-landing
+
+services:
+  web:
+    build: .
+    image: wastenot-landing:local
+    ports:
+      - 127.0.0.1:${LANDING_HOST_PORT:-8081}:8080
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
