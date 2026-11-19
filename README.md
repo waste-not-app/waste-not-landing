@@ -8,9 +8,9 @@
 ![Node 24](https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white)
 ![nginx](https://img.shields.io/badge/served%20by-nginx--unprivileged-009639?logo=nginx&logoColor=white)
 
-The site introduces WasteNot, a mobile app for logging household waste through Reduce, Reuse, Recycle, and Trash. It shows the app interface with illustrative data, separates shipped features from planned ones, and links to the latest APK. It also hosts the public privacy policy.
+This is the website for WasteNot, an app for logging household waste as Reduce, Reuse, Recycle, or Trash. It walks visitors through the app with sample data, keeps shipped features apart from planned ones, and links to the latest APK. It also hosts the privacy policy.
 
-**Live site:** <https://waste-not.bccdev.id/>
+Live site: <https://waste-not.bccdev.id/>
 
 ## Contents
 
@@ -25,21 +25,17 @@ The site introduces WasteNot, a mobile app for logging household waste through R
 
 ## Features
 
-- **Single-page site.** Hero, interface preview, benefits, about, and download sections, written in Indonesian for the app's audience.
-- **APK download.** Reads release metadata from `/apk/versions.json` on the same origin and links to `/apk/latest.apk`.
-- **Brand consistency.** Uses the WasteNot design system v1.3 and a self-hosted Plus Jakarta Sans font, with its OFL license, in `public/fonts/`.
-- **Privacy policy.** A standalone static page at `/privacy/` with no JavaScript, forms, or trackers.
-- **Strict security headers.**
-  - A Content Security Policy that allows no inline scripts.
-  - `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Cross-Origin-Opener-Policy`.
-- **Accessibility.**
-  - Follows the system light or dark theme.
-  - Shows visible keyboard focus.
-  - Uses touch-sized navigation targets.
+The site is a single page with a hero, an interactive phone demo, benefits, an about section, and a download section, all in English. The download card reads release metadata from `/apk/versions.json` on the same origin and links to `/apk/latest.apk`.
+
+It follows the WasteNot design system v1.3 and serves Plus Jakarta Sans itself, with the font's OFL license in `public/fonts/`. The privacy policy at `/privacy/` is a standalone static page with no JavaScript, forms, or trackers.
+
+Security headers are strict: the Content Security Policy allows no inline scripts, and the site also sends `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Cross-Origin-Opener-Policy`.
+
+The page follows the system's light or dark theme, shows a visible focus ring for keyboard users, and keeps navigation targets large enough to tap.
 
 ## Getting started
 
-Requirements: Node.js 22.12 or later (24 is recommended; see `.nvmrc`) and npm.
+You'll need Node.js 22.12 or later (24 is recommended; see `.nvmrc`) and npm.
 
 ```sh
 make install   # npm ci
@@ -66,14 +62,7 @@ make up     # build the image and serve it at http://127.0.0.1:8081
 make down
 ```
 
-The production image is built in two stages: Node 24 builds the site, then `nginx-unprivileged` serves it on port 8080 as a nonroot user. [`deploy/nginx.conf`](deploy/nginx.conf) configures:
-
-- the SPA fallback;
-- long-lived caching for `/assets/`;
-- a `/healthz` endpoint;
-- the shared security headers in [`deploy/security-headers.conf`](deploy/security-headers.conf).
-
-Apply the same headers on the staging Nginx.
+The production image is built in two stages. Node 24 builds the site, then `nginx-unprivileged` serves it on port 8080 as a nonroot user. [`deploy/nginx.conf`](deploy/nginx.conf) sets up the SPA fallback, long-lived caching for `/assets/`, a `/healthz` endpoint, and the shared headers in [`deploy/security-headers.conf`](deploy/security-headers.conf). Use the same headers on the staging Nginx.
 
 ## Project structure
 
@@ -95,9 +84,11 @@ waste-not-landing/
 
 ## Deployment
 
-- **CI** (`.github/workflows/ci.yml`) runs on every push and pull request. It installs dependencies with `npm ci`, runs `npm audit`, then runs `npm run check`.
-- **CD** (`.github/workflows/deploy.yml`) runs only after CI succeeds on `main`. A single job builds the site and syncs `dist/` to `/var/www/wastenot-landing/` with `rsync`. It then verifies that `index.html` and `privacy/index.html` exist. The runner lives on the web host, so no deployment secrets are needed.
-- **Dependabot** updates npm packages, GitHub Actions, and base images weekly.
+CI (`.github/workflows/ci.yml`) runs on every push and pull request: `npm ci`, then `npm audit`, then `npm run check`.
+
+CD (`.github/workflows/deploy.yml`) only runs after CI passes on `main`. One job builds the site, copies `dist/` to `/var/www/wastenot-landing/` with `rsync`, and checks that `index.html` and `privacy/index.html` made it. The runner lives on the web host, so the deployment needs no secrets.
+
+Dependabot keeps npm packages, GitHub Actions, and base images up to date each week.
 
 ### APK distribution
 
@@ -118,25 +109,15 @@ location = /apk/ {
 }
 ```
 
-An `alias` that points directly at `index.html` on a URI ending in `/` makes Nginx build `index.htmlindex.html` and return HTTP 500.
+If an `alias` points straight at `index.html` on a URI that ends in `/`, Nginx builds the path `index.htmlindex.html` and returns HTTP 500.
 
-Run `sudo nginx -t` before reloading. After reloading, confirm three things:
-
-1. `/apk/` returns HTML with status 200.
-2. `/apk/versions.json` lists the newest version.
-3. Its `download_url` downloads the APK.
+Run `sudo nginx -t` before you reload. Afterwards, check that `/apk/` returns HTML with a 200, that `/apk/versions.json` lists the newest version, and that its `download_url` actually downloads the APK.
 
 ## Privacy policy
 
-Vite copies `public/privacy/index.html` unchanged to `dist/privacy/index.html`, so the canonical URL is <https://waste-not.bccdev.id/privacy/>. After each deployment, confirm that `/privacy/` serves the policy rather than the SPA fallback.
+Vite copies `public/privacy/index.html` unchanged to `dist/privacy/index.html`, so the policy lives at <https://waste-not.bccdev.id/privacy/>. After each deployment, make sure `/privacy/` shows the policy and not the SPA fallback.
 
-The policy describes how the app actually processes data:
-
-- **Accounts and logs.** Stored in PostgreSQL. Photo attachments are kept in private storage.
-- **On the device.** Room drafts and the outbox stay local, and refresh tokens are protected by the Android Keystore.
-- **Scan photos.** Cached temporarily, not kept as attachments.
-- **AI recommendations.** Requests to Google Gemini contain only object context and guide evidence, never photos or account details.
-- **Account deletion.** Deleting an account removes active data immediately. Physical file cleanup may be retried later.
+The policy describes what the app really does with data. Accounts and logs are stored in PostgreSQL, and photo attachments sit in private storage. On the phone, drafts and the outbox stay local, and the Android Keystore protects the refresh token. Scan photos are cached for a short time and never become attachments. Requests to Google Gemini carry only object context and guide evidence, never photos or account details. Deleting an account removes active data right away, while cleanup of the physical files may be retried later.
 
 Update the policy whenever the Android app, the backend, or the AI workers change what they collect or how long they keep it.
 
