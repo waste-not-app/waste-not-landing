@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Cara WasteNot memproses akun, catatan sampah, foto, scan AI, dan data lokal, serta pilihan penghapusan data.">
+  <meta name="description" content="How WasteNot processes accounts, waste logs, photos, AI scans, and local data, and how you can delete your data.">
   <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://waste-not.bccdev.id/privacy/">
   <link rel="icon" href="/images/favicon-32.png" type="image/png">
-  <title>Kebijakan privasi | WasteNot</title>
+  <title>Privacy policy | WasteNot</title>
   <style>
     @font-face { font-family: "Plus Jakarta Sans"; src: url("/fonts/PlusJakartaSans-Variable.ttf") format("truetype"); font-style: normal; font-weight: 200 800; font-display: swap; }
     :root { color-scheme: light dark; --bg: #edf4eb; --surface: #f7fbf5; --ink: #182b20; --muted: #526457; --primary: #195b3d; --line: #738477; --accent: #d2ef69; --on-accent: #24390e; font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink); background: var(--bg); }
@@ -41,80 +41,80 @@
   </style>
 </head>
 <body>
-  <a class="skip" href="#isi">Lewati ke isi kebijakan</a>
+  <a class="skip" href="#content">Skip to the policy</a>
   <header>
-    <a class="brand" href="/" aria-label="WasteNot, halaman utama">WasteNot</a>
-    <a href="mailto:oktaavsm@student.ub.ac.id">Hubungi pengelola</a>
+    <a class="brand" href="/" aria-label="WasteNot, home page">WasteNot</a>
+    <a href="mailto:oktaavsm@student.ub.ac.id">Contact the maintainer</a>
   </header>
-  <main id="isi">
-    <p class="date">Diperbarui 16 November 2026</p>
-    <h1>Kebijakan privasi</h1>
-    <p>Halaman ini menjelaskan pemrosesan data pada aplikasi Android WasteNot, API di waste-not-api.bccdev.id, dan halaman publik WasteNot. Pengelolanya adalah Oktavianus Samuel Minarto. Pertanyaan dan permintaan data dapat dikirim ke <a href="mailto:oktaavsm@student.ub.ac.id">oktaavsm@student.ub.ac.id</a>.</p>
+  <main id="content">
+    <p class="date">Updated 16 November 2026</p>
+    <h1>Privacy policy</h1>
+    <p>This page explains how data is processed by the WasteNot Android app, the API at waste-not-api.bccdev.id, and the public WasteNot pages. The maintainer is Oktavianus Samuel Minarto. You can send questions and data requests to <a href="mailto:oktaavsm@student.ub.ac.id">oktaavsm@student.ub.ac.id</a>.</p>
     <div class="summary">
-      <p>Catatan dan lampiran yang kamu simpan terhubung ke akunmu. Foto scan dikirim saat kamu menjalankan scan, bukan saat sekadar membuka kamera. Foto scan dan foto lampiran catatan memakai alur penyimpanan yang berbeda.</p>
-      <p>Jangan sertakan wajah, dokumen identitas, alamat, atau informasi sensitif dalam foto dan catatan jika tidak diperlukan.</p>
+      <p>The logs and attachments you save are linked to your account. A scan photo is sent when you run a scan, not when you simply open the camera. Scan photos and log attachments are stored in different ways.</p>
+      <p>Leave faces, identity documents, addresses, and other sensitive details out of your photos and notes unless you really need them.</p>
     </div>
-    <nav aria-label="Isi kebijakan">
+    <nav aria-label="Policy contents">
       <ul>
-        <li><a href="#data">Data yang diproses dan tujuannya</a></li>
-        <li><a href="#foto-ai">Foto dan layanan AI</a></li>
-        <li><a href="#perangkat">Penyimpanan Android dan izin</a></li>
-        <li><a href="#penghapusan">Penghapusan dan masa penyimpanan</a></li>
-        <li><a href="#kontak">Kontak dan perubahan kebijakan</a></li>
+        <li><a href="#data">Data we process and why</a></li>
+        <li><a href="#photos-ai">Photos and AI services</a></li>
+        <li><a href="#device">Android storage and permissions</a></li>
+        <li><a href="#deletion">Deletion and retention</a></li>
+        <li><a href="#contact">Contact and policy changes</a></li>
       </ul>
     </nav>
     <section id="data">
-      <h2>Data yang diproses dan tujuannya</h2>
+      <h2>Data we process and why</h2>
       <ul>
-        <li>Nama, alamat email, zona waktu, dan pengenal akun digunakan untuk pendaftaran, akses akun, dan penanggalan aktivitas. Server menyimpan hash kata sandi, bukan kata sandi yang dapat dibaca kembali.</li>
-        <li>Token sesi dan masa berlakunya digunakan untuk autentikasi dan pencabutan akses. Token akses dan token penyegaran bukan data yang perlu kamu kirim kepada pengelola.</li>
-        <li>Catatan aktivitas berisi kategori sampah, metode penanganan, berat atau jumlah, tanggal, catatan teks, serta lampiran opsional. Server menggunakannya untuk riwayat, statistik, XP, dan pencapaian akun.</li>
-        <li>Pengenal permintaan dan versi catatan digunakan untuk sinkronisasi, pencegahan pencatatan ganda, dan penanganan konflik perubahan.</li>
-        <li>Permintaan jaringan membawa alamat IP dan metadata teknis ke server atau penyedia layanan yang dituju. Layanan menggunakan informasi permintaan untuk operasional, pembatasan akses, dan penelusuran gangguan. Log operasional dapat tetap tersedia terpisah dari data akun.</li>
+        <li>Your name, email address, time zone, and account ID are used for registration, signing in, and dating your activities. The server stores a hash of your password, never a password that can be read back.</li>
+        <li>Session tokens and their expiry are used to authenticate you and to revoke access. You never need to send your access or refresh tokens to the maintainer.</li>
+        <li>Activity logs contain the waste category, handling method, weight or count, date, text notes, and optional attachments. The server uses them for your history, statistics, XP, and achievements.</li>
+        <li>Request IDs and log versions are used to sync your data, prevent duplicate entries, and resolve conflicting edits.</li>
+        <li>Network requests carry your IP address and technical metadata to the server or service provider they reach. The services use this request information to operate, to limit abuse, and to investigate problems. Operational logs may be kept separately from account data.</li>
       </ul>
-      <p>Data akun disimpan pada database PostgreSQL backend WasteNot. Berkas foto lampiran disimpan terpisah di penyimpanan privat server dan diakses melalui API yang memeriksa pemilik akun. Ini bukan enkripsi ujung-ke-ujung: sistem server dan pengelola infrastruktur dapat memproses data untuk menjalankan layanan.</p>
+      <p>Account data is stored in the WasteNot backend's PostgreSQL database. Photo attachments are stored separately in private server storage and are only served through an API that checks who owns them. This is not end-to-end encryption: the server systems and the people who run the infrastructure can process data to keep the service running.</p>
     </section>
-    <section id="foto-ai">
-      <h2>Foto dan layanan AI</h2>
-      <p>Setelah kamu memilih untuk melakukan scan, aplikasi mengirim foto ke backend WasteNot. Backend menormalisasi gambar dan mengirimkannya ke layanan deteksi WasteNot yang menjalankan model deteksi objek. Alur ini tidak otomatis menjadikan foto scan sebagai lampiran catatan.</p>
-      <p>Alur deteksi tidak menyimpan foto scan mentah sebagai lampiran permanen di database. Server menyimpan hasil dan metadata operasi AI, termasuk objek, kondisi yang kamu konfirmasikan, dan rekomendasi, untuk melanjutkan sesi dan menangani permintaan ulang. Operasi AI memiliki masa berlaku sekitar 24 jam dan dibersihkan oleh pekerjaan pemeliharaan; ini bukan jaminan bahwa semua salinan di memori, log infrastruktur, atau cadangan hilang tepat saat masa berlaku berakhir.</p>
-      <p>Rekomendasi dapat memakai Google Gemini API. Payload rekomendasi berisi jenis objek, kategori, kondisi, pilihan penanganan, indikator risiko, dan bukti panduan yang relevan. Implementasi ini tidak memasukkan foto, nama, email, atau seluruh riwayat akun ke payload Gemini. Jika provider tidak tersedia, layanan dapat memilih metode melalui aturan bukti yang sudah tersedia.</p>
-      <p>Pemrosesan Google mengikuti <a href="https://ai.google.dev/gemini-api/terms">ketentuan Gemini API</a> dan <a href="https://policies.google.com/privacy">kebijakan privasi Google</a>, termasuk perbedaan ketentuan penggunaan data menurut jenis layanan. Kami tidak menjanjikan retensi nol, tidak digunakan untuk pelatihan, atau pemeriksaan manusia oleh provider tanpa bukti konfigurasi layanan yang berlaku. Jangan memasukkan informasi pribadi ke konteks yang tidak diperlukan.</p>
-      <p>Jika kamu menambahkan foto lampiran ke catatan, berkas diunggah dan disimpan secara terpisah agar dapat dilihat kembali dari akunmu. Backend menormalisasi gambar dan membuang metadata gambar pada proses unggah. Jangan mengandalkan penghapusan metadata untuk menyamarkan informasi yang terlihat di dalam gambar.</p>
-      <p>Hasil AI bukan pemeriksaan keselamatan atau peninjauan manusia. Kamu tetap perlu memeriksa kondisi barang dan syarat fasilitas penerima.</p>
+    <section id="photos-ai">
+      <h2>Photos and AI services</h2>
+      <p>When you choose to run a scan, the app sends the photo to the WasteNot backend. The backend normalizes the image and sends it to the WasteNot detection service, which runs an object detection model. This does not turn the scan photo into a log attachment.</p>
+      <p>The detection flow never stores the raw scan photo as a permanent attachment in the database. The server keeps the AI results and operation metadata, including the object, the condition you confirmed, and the recommendation, so it can continue the session and handle repeated requests. AI operations last about 24 hours and are then cleaned up by a maintenance job. That doesn't guarantee every copy in memory, infrastructure logs, or backups disappears the moment they expire.</p>
+      <p>Recommendations may use the Google Gemini API. The request to Gemini contains the object type, category, condition, handling options, risk indicators, and the relevant guide evidence. It never includes your photo, name, email, or full account history. If the provider is unavailable, the service can pick a method from the existing evidence rules instead.</p>
+      <p>Google processes this data under the <a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a> and the <a href="https://policies.google.com/privacy">Google privacy policy</a>, and its data-use terms differ by service type. We don't promise zero retention, no training use, or no human review by the provider without evidence of the service configuration in effect. Don't add personal information to the context when you don't need to.</p>
+      <p>If you add a photo attachment to a log, the file is uploaded and stored separately so you can view it again from your account. The backend normalizes the image and strips its metadata during upload. Don't rely on metadata removal to hide anything that is visible in the image itself.</p>
+      <p>AI results are not a safety check or a human review. You still need to check the item's condition and what your local collection facility accepts.</p>
     </section>
-    <section id="perangkat">
-      <h2>Penyimpanan Android dan izin</h2>
-      <p>Aplikasi menyimpan salinan catatan, ringkasan server, identitas akun, draf editor, dan antrean perubahan di penyimpanan privat aplikasi. Antrean lokal memungkinkan perubahan menunggu koneksi; status menunggu sinkronisasi berarti server belum tentu menerimanya. Data lokal ini bukan seluruhnya terenkripsi oleh aplikasi.</p>
-      <p>Token penyegaran disimpan dalam berkas terenkripsi dengan kunci Android Keystore. Preferensi tema dan pengingat juga disimpan di perangkat. Aplikasi menonaktifkan pencadangan Android untuk data aplikasinya, tetapi kebijakan perangkat dan salinan yang dibuat sendiri berada di luar kendali WasteNot.</p>
-      <p>Foto kamera untuk scan disimpan sementara di cache privat akun. Aplikasi menjadwalkan pembersihan foto scan setelah sekitar satu jam dan dapat menghapusnya lebih awal saat alur ditutup. Penjadwalan Android, kegagalan berkas, atau proses yang dihentikan dapat menunda pembersihan. Foto asli yang kamu pilih dari galeri tetap berada di galeri sampai kamu menghapusnya sendiri.</p>
+    <section id="device">
+      <h2>Android storage and permissions</h2>
+      <p>The app keeps copies of your logs, server summaries, account identity, editor drafts, and pending changes in its private storage. The local queue lets changes wait for a connection; a change that is waiting to sync may not have reached the server yet. Not all of this local data is encrypted by the app.</p>
+      <p>The refresh token is stored in a file encrypted with an Android Keystore key. Theme and reminder preferences are also stored on the device. The app turns off Android backup for its data, but device policies and copies you make yourself are outside WasteNot's control.</p>
+      <p>Camera photos for scans are kept temporarily in the account's private cache. The app schedules scan photos for deletion after about an hour and may delete them sooner when you close the flow. Android scheduling, file errors, or a stopped process can delay this cleanup. Original photos you pick from your gallery stay in your gallery until you delete them yourself.</p>
       <ul>
-        <li>Izin kamera digunakan untuk memotret saat kamu membuka fitur kamera. Menolak izin tidak menghalangi pencatatan manual.</li>
-        <li>Pemilih foto Android memberikan akses ke foto yang kamu pilih. WasteNot tidak meminta izin untuk membaca seluruh galeri.</li>
-        <li>Izin notifikasi bersifat opsional untuk pengingat lokal. Kamu dapat mematikannya lewat aplikasi atau pengaturan Android.</li>
-        <li>Daftar titik pengumpulan tidak memerlukan izin lokasi. Tombol Maps membuka pencarian alamat di aplikasi peta atau browser; penyedia tujuan memproses permintaan menurut kebijakannya sendiri.</li>
+        <li>Camera permission is used to take photos when you open the camera feature. Denying it doesn't stop you from logging manually.</li>
+        <li>The Android photo picker gives the app access only to the photos you choose. WasteNot never asks for permission to read your whole gallery.</li>
+        <li>Notification permission is optional and only used for local reminders. You can turn it off in the app or in Android settings.</li>
+        <li>The list of collection points doesn't need location permission. The Maps button opens an address search in a maps app or browser, and that provider handles the request under its own policy.</li>
       </ul>
-      <p>Halaman privasi ini tidak memakai formulir, pelacak analitik, cookie, atau penyimpanan browser melalui skrip. Font dan ikon dimuat dari domain WasteNot. Kunjungan tetap menghasilkan permintaan jaringan ke server situs. Tautan eksternal dan email hanya dibuka saat kamu memilihnya.</p>
+      <p>This privacy page uses no forms, analytics trackers, cookies, or script-based browser storage. Fonts and icons load from the WasteNot domain. Visiting the page still sends network requests to the site's server. External links and email only open when you choose them.</p>
     </section>
-    <section id="penghapusan">
-      <h2>Penghapusan dan masa penyimpanan</h2>
-      <p>Data akun dan catatan dipertahankan selama diperlukan untuk layanan akun, sampai dihapus melalui fitur yang tersedia. Menghapus aplikasi atau keluar dari akun bukan permintaan penghapusan akun server.</p>
+    <section id="deletion">
+      <h2>Deletion and retention</h2>
+      <p>Account data and logs are kept for as long as your account needs them, until you delete them with the features provided. Uninstalling the app or signing out is not a request to delete your account on the server.</p>
       <ul>
-        <li>Menghapus satu catatan mengeluarkannya dari riwayat aktif dan perhitungan. Backend memakai penandaan hapus untuk catatan, sehingga penghapusan satu catatan bukan janji pemusnahan langsung seluruh baris database.</li>
-        <li>Lampiran yang dilepas, dihapus, atau tidak jadi digunakan dapat dinonaktifkan lebih dahulu. Pembersihan berkas fisik terpisah dari perubahan status database dan dapat tertunda atau gagal. Batas kedaluwarsa lampiran sementara bukan janji pemusnahan berkas tepat waktu.</li>
-        <li>Untuk menghapus akun, buka Profil, lalu Pengaturan dan Hapus akun. Baca konfirmasi dan masukkan kata sandi saat ini. Setelah server menyetujui penghapusan, data milik akun di database aktif dihapus dan sesi dicabut. Pembersihan foto privat dijalankan terpisah dengan percobaan ulang; berkas dapat bertahan sampai proses itu berhasil.</li>
-        <li>Aplikasi membersihkan data lokal akun pada alur penghapusan yang berhasil. Jika permintaan gagal atau perangkat offline, jangan menganggap akun server telah terhapus. Ikuti pesan aplikasi atau hubungi pengelola.</li>
+        <li>Deleting a log removes it from your active history and totals. The backend marks deleted logs instead of erasing them, so deleting one log is not a promise that its database row is destroyed right away.</li>
+        <li>Attachments that you detach, delete, or never use may be deactivated first. Cleaning up the physical file is separate from the database change and can be delayed or fail. The expiry of a temporary attachment is not a promise that the file is destroyed on time.</li>
+        <li>To delete your account, open Profile, then Settings, then Delete account. Read the confirmation and enter your current password. Once the server accepts the deletion, your account's data in the active database is deleted and your sessions are revoked. Private photo cleanup runs separately with retries, so files may remain until it succeeds.</li>
+        <li>The app clears your account's local data when the deletion succeeds. If the request fails or your device is offline, don't assume your server account is gone. Follow the app's message or contact the maintainer.</li>
       </ul>
-      <p>Cadangan database, arsip operasional, log infrastruktur, data pada perangkat lain, dan data yang telah diproses provider dapat memiliki masa simpan terpisah. Penghapusan dari sistem aktif tidak otomatis memusnahkan cadangan atau arsip lama. Kami belum menetapkan jaminan publik tentang batas hari penghapusan semua cadangan; hubungi pengelola untuk meminta rincian yang berlaku.</p>
-      <p>Jika tidak dapat masuk, kirim permintaan penghapusan ke <a href="mailto:oktaavsm@student.ub.ac.id?subject=Permintaan%20penghapusan%20akun%20WasteNot">email pengelola</a> menggunakan alamat akun bila memungkinkan. Pengelola perlu memverifikasi kepemilikan sebelum bertindak. Jangan kirim kata sandi, token sesi, kode pemulihan, atau dokumen identitas tanpa diminta melalui proses yang dijelaskan pengelola.</p>
-      <p>Pemulihan kata sandi melalui email hanya dapat bekerja bila layanan pengiriman email server telah dikonfigurasi dan tersedia. Pesan kegagalan layanan bukan bukti email telah dikirim.</p>
+      <p>Database backups, operational archives, infrastructure logs, data on your other devices, and data the provider has already processed may be kept for different periods. Deleting data from the active systems doesn't automatically destroy older backups or archives. We haven't yet published a guaranteed time limit for deleting every backup; contact the maintainer for the current details.</p>
+      <p>If you can't sign in, send a deletion request to the <a href="mailto:oktaavsm@student.ub.ac.id?subject=WasteNot%20account%20deletion%20request">maintainer's email</a>, from your account's address if you can. The maintainer has to verify that the account is yours before acting. Don't send passwords, session tokens, recovery codes, or identity documents unless the maintainer asks for them through a process they explain.</p>
+      <p>Password recovery by email only works when the server's email delivery is configured and available. An error message from the service does not mean an email was sent.</p>
     </section>
-    <section id="kontak" class="contact">
-      <h2>Kontak dan perubahan kebijakan</h2>
-      <p>Pengelola: Oktavianus Samuel Minarto.<br><a href="mailto:oktaavsm@student.ub.ac.id">oktaavsm@student.ub.ac.id</a><br><a href="https://github.com/oktavsm">Profil publik pengelola di GitHub</a></p>
-      <p>Kamu dapat meminta informasi pemrosesan, koreksi data, atau penghapusan melalui kontak tersebut. Halaman ini menjelaskan implementasi layanan, bukan sertifikasi kepatuhan atau hasil pemeriksaan hukum. Jika alur pemrosesan berubah, pengelola memperbarui isi dan tanggal di halaman ini.</p>
+    <section id="contact" class="contact">
+      <h2>Contact and policy changes</h2>
+      <p>Maintainer: Oktavianus Samuel Minarto.<br><a href="mailto:oktaavsm@student.ub.ac.id">oktaavsm@student.ub.ac.id</a><br><a href="https://github.com/oktavsm">The maintainer's public GitHub profile</a></p>
+      <p>You can use that contact to ask how your data is processed, to correct it, or to delete it. This page describes how the service is built; it is not a compliance certification or the result of a legal review. If the processing changes, the maintainer will update this page and its date.</p>
     </section>
   </main>
-  <footer><a href="/">Kembali ke halaman WasteNot</a></footer>
+  <footer><a href="/">Back to WasteNot</a></footer>
 </body>
 </html>
