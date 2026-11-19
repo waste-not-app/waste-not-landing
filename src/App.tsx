@@ -2,8 +2,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import "./styles/global.css";
 
 type Release = { version: string; size: string; date: string };
-type ScreenId =
-  "beranda" | "ai" | "catat" | "riwayat" | "panduan" | "statistik";
+type ScreenId = "home" | "ai" | "log" | "history" | "guide" | "stats";
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return (
@@ -87,7 +86,7 @@ function HeroWBackdrop({ hoverX }: { hoverX: number | null }) {
     if (hoverX === null) {
       targetRef.current.weight = 0;
     } else {
-      // If waking from rest, start x right at pointer so it doesn't sweep from the old side
+      // When waking from rest, start at the pointer so it doesn't sweep in from the old side
       if (currentRef.current.weight < 0.02) {
         currentRef.current.x = hoverX;
       }
@@ -198,7 +197,7 @@ function HeroWBackdrop({ hoverX }: { hoverX: number | null }) {
           </linearGradient>
         </defs>
 
-        {/* Left Leaf — seamlessly anchored into the ribbon's left arm */}
+        {/* Left leaf, anchored into the ribbon's left arm */}
         <path
           d={`M88 332 C62 198, 152 62, ${ltx} ${lty} C382 156, 282 224, 154 244 C198 176, 288 122, 362 82 C264 124, 160 198, 88 332 Z`}
           fill="url(#wnLeafGrad)"
@@ -209,7 +208,7 @@ function HeroWBackdrop({ hoverX }: { hoverX: number | null }) {
           opacity="0.9"
         />
 
-        {/* Inner Fold Shadow — coupled to center peak & right valley */}
+        {/* Inner fold shadow, coupled to the center peak and right valley */}
         <path
           d={`M354 ${cpy} C404 ${(374 - pCenter * 10).toFixed(1)}, 468 ${(460 - pRightDip * 8).toFixed(1)}, 536 ${(492 - pRightDip * 10).toFixed(1)} C580 ${(512 - pRightDip * 10).toFixed(1)}, 628 492, 660 442 C614 452, 568 430, 514 372 C464 ${(316 - pCenter * 10).toFixed(1)}, 408 ${(282 - pCenter * 12).toFixed(1)}, 354 ${cpy} Z`}
           fill="url(#wnFoldGrad)"
@@ -239,8 +238,8 @@ function ThemeToggle({
       type="button"
       className="theme-toggle"
       onClick={onToggle}
-      aria-label={isDark ? "Ubah ke tema terang" : "Ubah ke tema gelap"}
-      title={isDark ? "Tema terang" : "Tema gelap"}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      title={isDark ? "Light theme" : "Dark theme"}
     >
       {isDark ? (
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -287,16 +286,16 @@ function AndroidScreen({
   onSelectAction?: (a: string) => void;
 }) {
   const methods = [
-    { id: "Reduce", sub: "Hindari pemakaian" },
-    { id: "Reuse", sub: "Gunakan kembali" },
-    { id: "Recycle", sub: "Daur ulang" },
-    { id: "Trash", sub: "Buang sebagai residu" },
+    { id: "Reduce", sub: "Avoid using it" },
+    { id: "Reuse", sub: "Use it again" },
+    { id: "Recycle", sub: "Recycle it" },
+    { id: "Trash", sub: "Throw it away" },
   ];
   const isMainTab =
-    screen === "beranda" ||
-    screen === "riwayat" ||
-    screen === "panduan" ||
-    screen === "statistik";
+    screen === "home" ||
+    screen === "history" ||
+    screen === "guide" ||
+    screen === "stats";
 
   return (
     <div className={`phone${interactive ? " phone-interactive" : ""}`}>
@@ -367,12 +366,12 @@ function AndroidScreen({
       </div>
 
       <div className={`phone-body${isMainTab ? " has-dock" : ""}`} key={screen}>
-        {screen === "beranda" && (
+        {screen === "home" && (
           <div className="screen-pane">
             <div className="app-heading">
               <div>
-                <span className="app-overline">Senin, 21 September</span>
-                <strong>Halo, Pengguna Demo.</strong>
+                <span className="app-overline">Monday, 21 September</span>
+                <strong>Hi, Demo User.</strong>
               </div>
               <span className="avatar-square" aria-hidden="true">
                 <svg viewBox="0 0 20 20" fill="none">
@@ -394,11 +393,11 @@ function AndroidScreen({
             </div>
 
             <div className="summary-card">
-              <span>Sampah ditangani hari ini</span>
+              <span>Waste handled today</span>
               <strong>
                 650 <small>g</small>
               </strong>
-              <span className="summary-sub">3 aktivitas tercatat</span>
+              <span className="summary-sub">3 activities logged</span>
               <div className="summary-rule" />
               <div className="summary-bottom">
                 <span className="summary-note-icon" aria-hidden="true">
@@ -420,7 +419,7 @@ function AndroidScreen({
                     />
                   </svg>
                 </span>
-                <span>Catatan pribadi, bukan dampak terverifikasi.</span>
+                <span>Your personal log, not a verified impact claim.</span>
               </div>
             </div>
 
@@ -428,18 +427,18 @@ function AndroidScreen({
               <button
                 type="button"
                 className="mock-outline-btn"
-                onClick={() => onSelectScreen("catat")}
+                onClick={() => onSelectScreen("log")}
               >
-                Input manual
+                Log manually
               </button>
             ) : (
-              <div className="mock-outline-btn">Input manual</div>
+              <div className="mock-outline-btn">Log manually</div>
             )}
 
             <div className="lime-highlight-card">
               <div>
-                <strong>2 benda dihindari</strong>
-                <small>Reduce dicatat terpisah.</small>
+                <strong>2 items avoided</strong>
+                <small>Reduce is tracked separately.</small>
               </div>
               <span className="lime-card-icon" aria-hidden="true">
                 <svg viewBox="0 0 20 20" fill="none">
@@ -457,7 +456,7 @@ function AndroidScreen({
             <div className="rate-row">
               <div>
                 <strong>Recycling rate</strong>
-                <small>Berdasarkan aktivitas penanganan</small>
+                <small>Based on handling activities</small>
               </div>
               <strong className="rate-value">50%</strong>
             </div>
@@ -481,8 +480,8 @@ function AndroidScreen({
                 <button
                   type="button"
                   className="subflow-back"
-                  onClick={() => onSelectScreen("beranda")}
-                  aria-label="Kembali ke Beranda"
+                  onClick={() => onSelectScreen("home")}
+                  aria-label="Back to Home"
                 >
                   <svg viewBox="0 0 20 20" fill="none">
                     <path
@@ -507,20 +506,20 @@ function AndroidScreen({
                   </svg>
                 </span>
               )}
-              <strong>Kamera &amp; scan</strong>
+              <strong>Camera &amp; scan</strong>
             </div>
 
             <div className="scan-stepper" aria-hidden="true">
-              <span className="scan-step is-active">1 Foto</span>
-              <span className="scan-step">2 Objek</span>
-              <span className="scan-step">3 Kondisi</span>
-              <span className="scan-step">4 Saran</span>
+              <span className="scan-step is-active">1 Photo</span>
+              <span className="scan-step">2 Object</span>
+              <span className="scan-step">3 Condition</span>
+              <span className="scan-step">4 Advice</span>
             </div>
 
             <div className="ai-viewfinder is-scanning">
               <img
                 src="/images/waste-materials.webp"
-                alt="Pratinjau kamera untuk memindai material sampah"
+                alt="Camera preview scanning waste materials"
                 loading="lazy"
                 decoding="async"
               />
@@ -530,12 +529,12 @@ function AndroidScreen({
 
             <div className="ai-result-card">
               <div className="ai-result-head">
-                <strong>Saran contoh · perlu konfirmasi</strong>
+                <strong>Sample advice · needs your OK</strong>
                 <span>Recycle</span>
               </div>
               <small>
-                Keputusan penanganan mengikuti kondisi dan penerimaan fasilitas
-                setempat.
+                How you handle it depends on its condition and what your local
+                facility accepts.
               </small>
             </div>
 
@@ -544,36 +543,36 @@ function AndroidScreen({
                 <button
                   type="button"
                   className="mock-save-btn"
-                  onClick={() => onSelectScreen("catat")}
+                  onClick={() => onSelectScreen("log")}
                 >
-                  Gunakan pilihan, isi jumlah
+                  Use this, add amount
                 </button>
                 <button
                   type="button"
                   className="mock-outline-btn"
-                  onClick={() => onSelectScreen("catat")}
+                  onClick={() => onSelectScreen("log")}
                 >
-                  Input manual
+                  Log manually
                 </button>
               </>
             ) : (
               <>
-                <div className="mock-save-btn">Gunakan pilihan, isi jumlah</div>
-                <div className="mock-outline-btn">Input manual</div>
+                <div className="mock-save-btn">Use this, add amount</div>
+                <div className="mock-outline-btn">Log manually</div>
               </>
             )}
           </div>
         )}
 
-        {screen === "catat" && (
+        {screen === "log" && (
           <div className="screen-pane">
             <div className="subflow-header">
               {interactive && onSelectScreen ? (
                 <button
                   type="button"
                   className="subflow-back"
-                  onClick={() => onSelectScreen("beranda")}
-                  aria-label="Kembali ke Beranda"
+                  onClick={() => onSelectScreen("home")}
+                  aria-label="Back to Home"
                 >
                   <svg viewBox="0 0 20 20" fill="none">
                     <path
@@ -598,10 +597,10 @@ function AndroidScreen({
                   </svg>
                 </span>
               )}
-              <strong>Catat aktivitas</strong>
+              <strong>Log activity</strong>
             </div>
 
-            <div className="mock-field-label">Cara pengelolaan</div>
+            <div className="mock-field-label">How you handled it</div>
             <div className="method-grid-2x2">
               {methods.map((m) => {
                 const active = (selectedAction ?? "Recycle") === m.id;
@@ -636,9 +635,9 @@ function AndroidScreen({
               })}
             </div>
 
-            <div className="mock-field-label">Kategori</div>
+            <div className="mock-field-label">Category</div>
             <div className="mock-input-box">
-              <span>Plastik</span>
+              <span>Plastic</span>
               <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
                 <path
                   d="m4 6 4 4 4-4"
@@ -652,13 +651,13 @@ function AndroidScreen({
 
             <div className="mock-row-2col">
               <div>
-                <div className="mock-field-label">Berat</div>
+                <div className="mock-field-label">Weight</div>
                 <div className="mock-input-box">
                   <span>250</span>
                 </div>
               </div>
               <div>
-                <div className="mock-field-label">Satuan</div>
+                <div className="mock-field-label">Unit</div>
                 <div className="mock-input-box">
                   <span>g</span>
                   <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -674,26 +673,26 @@ function AndroidScreen({
               </div>
             </div>
 
-            <div className="mock-field-label">Tanggal aktivitas</div>
+            <div className="mock-field-label">Activity date</div>
             <div className="mock-input-box">
               <span>21/09/2026</span>
             </div>
 
-            <div className="mock-field-label">Catatan (opsional)</div>
+            <div className="mock-field-label">Notes (optional)</div>
             <div className="mock-input-box is-note">
-              <span>Botol kemasan. Data simulasi.</span>
+              <span>Drink bottle. Sample data.</span>
             </div>
 
-            <div className="mock-save-btn">Simpan catatan</div>
+            <div className="mock-save-btn">Save log</div>
           </div>
         )}
 
-        {screen === "riwayat" && (
+        {screen === "history" && (
           <div className="screen-pane">
             <div className="app-heading">
               <div>
-                <strong>Riwayat</strong>
-                <span className="app-overline-sub">5 aktivitas tercatat.</span>
+                <strong>History</strong>
+                <span className="app-overline-sub">5 activities logged.</span>
               </div>
               <span className="avatar-square" aria-hidden="true">
                 <svg viewBox="0 0 20 20" fill="none">
@@ -708,14 +707,14 @@ function AndroidScreen({
             </div>
 
             <div className="app-section-title">
-              <strong>Hari ini</strong>
+              <strong>Today</strong>
             </div>
             <div className="activity">
               <span className="activity-icon" aria-hidden="true">
                 ♻
               </span>
               <span>
-                <strong>Plastik · Recycle</strong>
+                <strong>Plastic · Recycle</strong>
                 <small>21 Sep · 250 g</small>
               </span>
             </div>
@@ -724,7 +723,7 @@ function AndroidScreen({
                 ↻
               </span>
               <span>
-                <strong>Kaca · Reuse</strong>
+                <strong>Glass · Reuse</strong>
                 <small>21 Sep · 400 g</small>
               </span>
             </div>
@@ -733,8 +732,8 @@ function AndroidScreen({
                 ✦
               </span>
               <span>
-                <strong>Plastik · Reduce</strong>
-                <small>21 Sep · 2 benda dihindari</small>
+                <strong>Plastic · Reduce</strong>
+                <small>21 Sep · 2 items avoided</small>
               </span>
             </div>
 
@@ -746,7 +745,7 @@ function AndroidScreen({
                 •
               </span>
               <span>
-                <strong>Organik · Trash</strong>
+                <strong>Organic · Trash</strong>
                 <small>20 Sep · 600 g</small>
               </span>
             </div>
@@ -755,7 +754,7 @@ function AndroidScreen({
                 ♻
               </span>
               <span>
-                <strong>Kertas · Recycle</strong>
+                <strong>Paper · Recycle</strong>
                 <small>20 Sep · 150 g</small>
               </span>
             </div>
@@ -764,38 +763,38 @@ function AndroidScreen({
               <button
                 type="button"
                 className="mock-outline-btn"
-                onClick={() => onSelectScreen("catat")}
+                onClick={() => onSelectScreen("log")}
               >
-                Input manual
+                Log manually
               </button>
             ) : (
-              <div className="mock-outline-btn">Input manual</div>
+              <div className="mock-outline-btn">Log manually</div>
             )}
           </div>
         )}
 
-        {screen === "panduan" && (
+        {screen === "guide" && (
           <div className="screen-pane">
             <div className="app-heading">
               <div>
-                <strong>Panduan</strong>
+                <strong>Guide</strong>
                 <span className="app-overline-sub">
-                  Kenali materialnya, tentukan langkah berikutnya.
+                  Know the material, then pick your next step.
                 </span>
               </div>
             </div>
 
             <div className="mock-search-row">
-              <div className="mock-search">Cari panduan</div>
-              <span className="mock-search-btn">Cari</span>
-              <span className="mock-search-clear">Hapus</span>
+              <div className="mock-search">Search guides</div>
+              <span className="mock-search-btn">Search</span>
+              <span className="mock-search-clear">Clear</span>
             </div>
 
             <div className="guide-warn-card">
-              <strong>Periksa kondisi sebelum memilah</strong>
+              <strong>Check the condition before sorting</strong>
               <small>
-                Pastikan wadah bebas sisa cairan agar tidak mencemari material
-                lain.
+                Empty out any liquid first so it doesn't contaminate other
+                materials.
               </small>
             </div>
 
@@ -807,7 +806,7 @@ function AndroidScreen({
                 decoding="async"
               />
               <div>
-                <strong>Botol plastik</strong>
+                <strong>Plastic bottles</strong>
                 <small>Recycle</small>
               </div>
               <span className="guide-chevron" aria-hidden="true">
@@ -822,7 +821,7 @@ function AndroidScreen({
                 decoding="async"
               />
               <div>
-                <strong>Wadah kaca</strong>
+                <strong>Glass containers</strong>
                 <small>Reuse</small>
               </div>
               <span className="guide-chevron" aria-hidden="true">
@@ -837,7 +836,7 @@ function AndroidScreen({
                 decoding="async"
               />
               <div>
-                <strong>Kertas dan kardus</strong>
+                <strong>Paper and cardboard</strong>
                 <small>Recycle</small>
               </div>
               <span className="guide-chevron" aria-hidden="true">
@@ -847,35 +846,35 @@ function AndroidScreen({
           </div>
         )}
 
-        {screen === "statistik" && (
+        {screen === "stats" && (
           <div className="screen-pane">
             <div className="app-heading">
               <div>
-                <strong>Statistik</strong>
+                <strong>Statistics</strong>
               </div>
             </div>
 
             <div className="segmented-toggle" aria-hidden="true">
-              <span className="is-active">7 hari</span>
-              <span>30 hari</span>
+              <span className="is-active">7 days</span>
+              <span>30 days</span>
             </div>
 
-            <span className="app-overline-sub">15 Sep hingga 21 Sep 2026</span>
+            <span className="app-overline-sub">15 Sep to 21 Sep 2026</span>
 
             <div className="summary-card compact">
-              <span>Sampah ditangani</span>
+              <span>Waste handled</span>
               <strong>
-                1,4 <small>kg</small>
+                1.4 <small>kg</small>
               </strong>
               <span className="summary-sub">
-                5 aktivitas · 0 benda ditangani
+                5 activities · 0 items handled
               </span>
             </div>
 
             <div className="lime-highlight-card">
               <div>
-                <strong>2 benda dihindari</strong>
-                <small>Reduce dicatat terpisah.</small>
+                <strong>2 items avoided</strong>
+                <small>Reduce is tracked separately.</small>
               </div>
               <span className="lime-card-icon" aria-hidden="true">
                 <svg viewBox="0 0 20 20" fill="none">
@@ -891,7 +890,7 @@ function AndroidScreen({
             </div>
 
             <div className="mock-chart-card">
-              <div className="mock-chart-title">Berat ditangani per hari</div>
+              <div className="mock-chart-title">Weight handled per day</div>
               <div className="mock-chart-bars">
                 {[
                   { day: "15", h: 12 },
@@ -939,7 +938,7 @@ function AndroidScreen({
                   strokeWidth="1.6"
                 />
               </svg>
-              <span>Catat / Scan</span>
+              <span>Log / Scan</span>
             </button>
           ) : (
             <span className="dock-fab">
@@ -957,18 +956,18 @@ function AndroidScreen({
                   strokeWidth="1.6"
                 />
               </svg>
-              <span>Catat / Scan</span>
+              <span>Log / Scan</span>
             </span>
           )}
 
           <div className="app-dock">
             {(
               [
-                { id: "beranda", label: "Beranda", icon: "home" },
-                { id: "riwayat", label: "Riwayat", icon: "list" },
-                { id: "panduan", label: "Panduan", icon: "book" },
-                { id: "statistik", label: "Statistik", icon: "chart" },
-                { id: "profil", label: "Profil", icon: "user" },
+                { id: "home", label: "Home", icon: "home" },
+                { id: "history", label: "History", icon: "list" },
+                { id: "guide", label: "Guide", icon: "book" },
+                { id: "stats", label: "Stats", icon: "chart" },
+                { id: "profile", label: "Profile", icon: "user" },
               ] as const
             ).map((tab) => {
               const isActive = screen === tab.id;
@@ -1044,7 +1043,7 @@ function AndroidScreen({
                 </>
               );
 
-              if (interactive && onSelectScreen && tab.id !== "profil") {
+              if (interactive && onSelectScreen && tab.id !== "profile") {
                 return (
                   <button
                     key={tab.id}
@@ -1081,12 +1080,12 @@ function ReleaseInfo() {
     const controller = new AbortController();
     fetch("/apk/versions.json", { signal: controller.signal })
       .then((response) => {
-        if (!response.ok) throw new Error("Metadata rilis tidak tersedia");
+        if (!response.ok) throw new Error("Release metadata unavailable");
         return response.json();
       })
       .then((data: { latest?: Release | null }) => {
         if (!data.latest || typeof data.latest.version !== "string")
-          throw new Error("Belum ada rilis");
+          throw new Error("No release yet");
         setRelease(data.latest);
         setState("ready");
       })
@@ -1102,11 +1101,11 @@ function ReleaseInfo() {
       className={`release-info${state === "error" ? " release-info-error" : ""}`}
       aria-live="polite"
     >
-      {state === "loading" && "Memuat informasi rilis…"}
-      {state === "error" && "Informasi versi belum dapat dimuat."}
+      {state === "loading" && "Loading release info…"}
+      {state === "error" && "Couldn't load the version info."}
       {state === "ready" &&
         release &&
-        `Versi ${release.version} · ${release.size} · ${release.date}`}
+        `Version ${release.version} · ${release.size} · ${release.date}`}
     </div>
   );
 }
@@ -1117,34 +1116,34 @@ const simulatorTabs: {
   desc: string;
 }[] = [
   {
-    id: "beranda",
-    title: "Beranda & ringkasan harian",
-    desc: "Pantau total berat sampah yang kamu tangani hari ini dan aktivitas terbarumu dalam satu pandangan.",
+    id: "home",
+    title: "Home and daily summary",
+    desc: "See how much waste you handled today and your latest activity at a glance.",
   },
   {
     id: "ai",
-    title: "Pindai sampah dengan AI",
-    desc: "Arahkan kamera ke material sampah untuk mengenali jenis, perkiraan berat, dan saran 3R atau Trash secara otomatis.",
+    title: "Scan waste with AI",
+    desc: "Point the camera at an item to identify the material and get a suggested Reduce, Reuse, Recycle, or Trash step that you confirm.",
   },
   {
-    id: "catat",
-    title: "Catat manual dengan cepat",
-    desc: "Pilih jenis material, tentukan berat atau jumlah, lalu tandai Reduce, Reuse, Recycle, atau Trash.",
+    id: "log",
+    title: "Quick manual logging",
+    desc: "Pick the material, enter the weight or count, then mark it as Reduce, Reuse, Recycle, or Trash.",
   },
   {
-    id: "riwayat",
-    title: "Riwayat yang mudah ditelusuri",
-    desc: "Lihat kembali catatan harianmu lengkap dengan kategori 3R & Trash serta waktu pencatatan.",
+    id: "history",
+    title: "History that's easy to browse",
+    desc: "Look back at your daily logs, with each entry's category, method, and date.",
   },
   {
-    id: "panduan",
-    title: "Panduan pemilahan 3R & Trash",
-    desc: "Referensi singkat untuk mengenali material dan langkah penanganan yang tepat tanpa menghakimi.",
+    id: "guide",
+    title: "Sorting guides for every method",
+    desc: "Short, judgment-free references for recognizing a material and handling it properly.",
   },
   {
-    id: "statistik",
-    title: "Statistik kebiasaan mingguan",
-    desc: "Visualisasi progres berdasarkan catatan nyatamu sendiri dari hari ke hari.",
+    id: "stats",
+    title: "Weekly habit statistics",
+    desc: "Charts of your progress, built from your own logs day by day.",
   },
 ];
 
@@ -1161,7 +1160,7 @@ function App() {
   const [theme, setTheme] = useState<"light" | "dark">(getInitialTheme);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
-  const [activeScreen, setActiveScreen] = useState<ScreenId>("beranda");
+  const [activeScreen, setActiveScreen] = useState<ScreenId>("home");
   const [selectedAction, setSelectedAction] = useState("Recycle");
   const [heroHoverX, setHeroHoverX] = useState<number | null>(null);
 
@@ -1254,36 +1253,36 @@ function App() {
   return (
     <>
       <a className="skip-link" href="#main">
-        Lewati ke konten
+        Skip to content
       </a>
 
       <header className="site-header" ref={headerRef}>
         <div className="container header-inner">
           <a
-            href="#atas"
+            href="#top"
             className="brand-link"
-            aria-label="WasteNot, kembali ke atas"
+            aria-label="WasteNot, back to top"
             onClick={() => setMenuOpen(false)}
           >
             <Brand />
           </a>
 
-          <nav className="desktop-nav" aria-label="Navigasi utama">
-            <a href="#antarmuka">Antarmuka & AI</a>
-            <a href="#manfaat">Manfaat</a>
-            <a href="#tentang">Tentang aplikasi</a>
+          <nav className="desktop-nav" aria-label="Main navigation">
+            <a href="#interface">App &amp; AI</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#about">About</a>
           </nav>
 
           <div className="header-actions">
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
-            <a className="header-cta" href="#unduh">
-              Unduh aplikasi <Arrow diagonal />
+            <a className="header-cta" href="#download">
+              Get the app <Arrow diagonal />
             </a>
             <button
               type="button"
               className="menu-toggle"
               aria-expanded={menuOpen}
-              aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
               onClick={() => setMenuOpen((prev) => !prev)}
             >
               <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -1314,34 +1313,34 @@ function App() {
           inert={!menuOpen}
         >
           <div className="container">
-            <nav className="mobile-nav" aria-label="Navigasi seluler">
+            <nav className="mobile-nav" aria-label="Mobile navigation">
               <a
-                href="#antarmuka"
+                href="#interface"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                Antarmuka & AI
+                App &amp; AI
               </a>
               <a
-                href="#manfaat"
+                href="#benefits"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                Manfaat
+                Benefits
               </a>
               <a
-                href="#tentang"
+                href="#about"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                Tentang aplikasi
+                About
               </a>
               <a
-                href="#unduh"
+                href="#download"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                Unduh aplikasi
+                Get the app
               </a>
             </nav>
           </div>
@@ -1349,30 +1348,30 @@ function App() {
       </header>
 
       <main id="main">
-        <section className="hero" id="atas">
+        <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
-              <h1 aria-label="Kebiasaan baik dimulai dari satu catatan.">
+              <h1 aria-label="Good habits start with a single log.">
                 <KineticText
-                  text="Kebiasaan baik dimulai dari satu catatan."
-                  accent="satu catatan."
+                  text="Good habits start with a single log."
+                  accent="a single log."
                 />
               </h1>
               <p className="hero-lede">
-                Catat sampah yang kamu tangani, kenali materialnya dengan AI,
-                pahami pilihan 3R hingga Trash, dan lihat kebiasaanmu berkembang
-                dari hari ke hari.
+                Log the waste you handle, let AI help you identify the material,
+                learn your options from Reduce to Trash, and watch your habits
+                grow day by day.
               </p>
               <div className="hero-actions">
                 <a
                   className="button button-primary"
-                  href="#antarmuka"
+                  href="#interface"
                   onClick={() => setActiveScreen("ai")}
                 >
-                  Coba demo AI & antarmuka <Arrow diagonal />
+                  Try the app and AI demo <Arrow diagonal />
                 </a>
-                <a className="text-link" href="#unduh">
-                  Unduh untuk Android <Arrow />
+                <a className="text-link" href="#download">
+                  Download for Android <Arrow />
                 </a>
               </div>
             </div>
@@ -1395,35 +1394,34 @@ function App() {
               </div>
 
               <div className="trio-center">
-                <AndroidScreen screen="beranda" />
+                <AndroidScreen screen="home" />
               </div>
 
               <div className="trio-side trio-right">
-                <AndroidScreen screen="statistik" />
+                <AndroidScreen screen="stats" />
               </div>
             </div>
           </div>
         </section>
 
-        <section className="section showcase-section" id="antarmuka">
+        <section className="section showcase-section" id="interface">
           <div className="container showcase-grid">
             <div className="showcase-copy" data-reveal="left">
-              <p className="eyebrow" aria-label="Eksplorasi antarmuka">
-                <KineticText text="Eksplorasi antarmuka" />
+              <p className="eyebrow" aria-label="Explore the app">
+                <KineticText text="Explore the app" />
               </p>
-              <h2 aria-label="Semua fitur utama, termasuk demo pindai AI.">
-                <KineticText text="Semua fitur utama, termasuk demo pindai AI." />
+              <h2 aria-label="Every main feature, including the AI scan.">
+                <KineticText text="Every main feature, including the AI scan." />
               </h2>
               <p className="showcase-lede">
-                Pilih halaman di bawah atau ketuk langsung ikon navigasi di
-                dalam ponsel untuk melihat alur setiap fitur, termasuk pindai
-                AI.
+                Pick a screen below, or tap the navigation icons on the phone,
+                to walk through each feature, including the AI scan.
               </p>
 
               <div
                 className="screen-switcher"
                 role="tablist"
-                aria-label="Pilih layar Android"
+                aria-label="Choose an Android screen"
               >
                 {simulatorTabs.map((tab, idx) => {
                   const active = activeScreen === tab.id;
@@ -1460,13 +1458,13 @@ function App() {
                 onSelectAction={setSelectedAction}
               />
               <p className="device-caption">
-                Demo interaktif · Ketuk layar ponsel untuk mencoba
+                Interactive demo · Tap the phone screen to try it
               </p>
             </div>
           </div>
         </section>
 
-        <section className="section benefits" id="manfaat">
+        <section className="section benefits" id="benefits">
           <div
             className="seam-photo seam-photo-right seam-bottle"
             aria-hidden="true"
@@ -1488,15 +1486,13 @@ function App() {
           </div>
           <div className="container">
             <div className="section-head" data-reveal="up">
-              <p className="eyebrow" aria-label="Arah produk">
-                <KineticText text="Arah produk" />
+              <p className="eyebrow" aria-label="What it does">
+                <KineticText text="What it does" />
               </p>
-              <h2 aria-label="Lebih mudah peduli saat semuanya terasa jelas.">
-                <KineticText text="Lebih mudah peduli saat semuanya terasa jelas." />
+              <h2 aria-label="Caring is easier when things are clear.">
+                <KineticText text="Caring is easier when things are clear." />
               </h2>
-              <p>
-                Tiga kemampuan inti yang membuat kebiasaan baik terasa ringan.
-              </p>
+              <p>Three things that make good habits feel lighter.</p>
             </div>
 
             <div className="editorial-cards">
@@ -1508,17 +1504,17 @@ function App() {
                 <div className="editorial-media">
                   <img
                     src="/images/card-ai-bottle.webp"
-                    alt="Ponsel memindai botol plastik PET di atas meja untuk dikenali AI"
+                    alt="A phone scanning a PET plastic bottle on a table for the AI to identify"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <div className="editorial-body">
-                  <span className="card-index">01 · Pindai & Catat</span>
-                  <h3>Kenali lebih cepat dengan AI.</h3>
+                  <span className="card-index">01 · Scan and log</span>
+                  <h3>Identify items faster with AI.</h3>
                   <p>
-                    Ambil foto atau catat manual untuk memuat material, berat,
-                    dan cara penanganan dalam satu langkah singkat.
+                    Snap a photo or log it by hand to capture the material,
+                    weight, and how you handled it in one quick step.
                   </p>
                 </div>
               </article>
@@ -1530,18 +1526,18 @@ function App() {
               >
                 <div className="editorial-chart-stage" aria-hidden="true">
                   <div className="editorial-chart-head">
-                    <span>7 hari terakhir</span>
-                    <strong>2,45 kg</strong>
+                    <span>Last 7 days</span>
+                    <strong>2.45 kg</strong>
                   </div>
                   <div className="editorial-chart-bars">
                     {[
-                      { day: "Sen", val: 44 },
-                      { day: "Sel", val: 68 },
-                      { day: "Rab", val: 40 },
-                      { day: "Kam", val: 84 },
-                      { day: "Jum", val: 58 },
-                      { day: "Sab", val: 94, peak: true },
-                      { day: "Min", val: 72 },
+                      { day: "Mon", val: 44 },
+                      { day: "Tue", val: 68 },
+                      { day: "Wed", val: 40 },
+                      { day: "Thu", val: 84 },
+                      { day: "Fri", val: 58 },
+                      { day: "Sat", val: 94, peak: true },
+                      { day: "Sun", val: 72 },
                     ].map((bar) => (
                       <div key={bar.day} className="editorial-bar-col">
                         <span
@@ -1554,11 +1550,11 @@ function App() {
                   </div>
                 </div>
                 <div className="editorial-body">
-                  <span className="card-index">02 · Pahami</span>
-                  <h3>Lihat pola, bukan tebakan.</h3>
+                  <span className="card-index">02 · Understand</span>
+                  <h3>See patterns, not guesses.</h3>
                   <p>
-                    Riwayat dan statistik memperlihatkan aktivitas yang tercatat
-                    dari waktu ke waktu secara jujur.
+                    History and statistics show what you've actually logged over
+                    time.
                   </p>
                 </div>
               </article>
@@ -1571,17 +1567,17 @@ function App() {
                 <div className="editorial-media">
                   <img
                     src="/images/hero-sorting.webp"
-                    alt="Penerapan 3R di rumah: botol plastik dan toples kaca bersih terpilah di samping wadah pilah Paper, Plastic, Glass serta tas belanja kain"
+                    alt="Sorting at home: clean plastic bottles and glass jars next to Paper, Plastic, and Glass bins and a cloth shopping bag"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
                 <div className="editorial-body">
-                  <span className="card-index">03 · Lanjutkan</span>
-                  <h3>Temukan langkah berikutnya.</h3>
+                  <span className="card-index">03 · Keep going</span>
+                  <h3>Find your next step.</h3>
                   <p>
-                    Panduan material memberi arah Reduce, Reuse, Recycle, atau
-                    Trash tanpa menghakimi pilihanmu.
+                    Material guides point you to Reduce, Reuse, Recycle, or
+                    Trash without judging your choices.
                   </p>
                 </div>
               </article>
@@ -1589,7 +1585,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section about" id="tentang">
+        <section className="section about" id="about">
           <div
             className="seam-photo seam-photo-left seam-box"
             aria-hidden="true"
@@ -1618,20 +1614,19 @@ function App() {
           </div>
           <div className="container about-grid">
             <div className="about-copy" data-reveal="left">
-              <p className="eyebrow" aria-label="Dibuat untuk kebiasaan nyata">
-                <KineticText text="Dibuat untuk kebiasaan nyata" />
+              <p className="eyebrow" aria-label="Built for real habits">
+                <KineticText text="Built for real habits" />
               </p>
-              <h2 aria-label="Lebih dari sekadar menghitung sampah.">
-                <KineticText text="Lebih dari sekadar menghitung sampah." />
+              <h2 aria-label="More than counting trash.">
+                <KineticText text="More than counting trash." />
               </h2>
               <p>
-                WasteNot hadir sebagai ruang pribadi untuk mencatat keputusan
-                sehari-hari, memahami pilihan yang tersedia, lalu menentukan
-                langkah berikutnya.
+                WasteNot is a private space to record everyday choices,
+                understand your options, and decide what to do next.
               </p>
               <div className="about-tags">
-                <span>Catatan pribadi</span>
-                <span>Tanpa klaim berlebih</span>
+                <span>Private by default</span>
+                <span>No inflated claims</span>
               </div>
             </div>
 
@@ -1660,10 +1655,10 @@ function App() {
                 </span>
                 <div className="pillar-body">
                   <div className="pillar-head">
-                    <h3>Kurangi dari awal</h3>
+                    <h3>Cut it at the source</h3>
                     <span className="pillar-badge">Reduce</span>
                   </div>
-                  <p>Mengurangi barang sekali pakai sebelum menjadi sampah.</p>
+                  <p>Use fewer single-use items before they become waste.</p>
                 </div>
               </div>
 
@@ -1692,12 +1687,12 @@ function App() {
                 </span>
                 <div className="pillar-body">
                   <div className="pillar-head">
-                    <h3>Pakai ulang lebih lama</h3>
+                    <h3>Keep using it longer</h3>
                     <span className="pillar-badge">Reuse</span>
                   </div>
                   <p>
-                    Memakai ulang wadah, kemasan, atau sisa organik untuk
-                    kompos.
+                    Reuse containers and packaging, or turn organic scraps into
+                    compost.
                   </p>
                 </div>
               </div>
@@ -1734,10 +1729,10 @@ function App() {
                 </span>
                 <div className="pillar-body">
                   <div className="pillar-head">
-                    <h3>Pilah untuk didaur ulang</h3>
+                    <h3>Sort it for recycling</h3>
                     <span className="pillar-badge">Recycle</span>
                   </div>
-                  <p>Memilah material bersih agar lebih mudah didaur ulang.</p>
+                  <p>Separate clean materials so they're easier to recycle.</p>
                 </div>
               </div>
 
@@ -1759,12 +1754,11 @@ function App() {
                 </span>
                 <div className="pillar-body">
                   <div className="pillar-head">
-                    <h3>Buang residu dengan tepat</h3>
+                    <h3>Throw away what's left, properly</h3>
                     <span className="pillar-badge">Trash</span>
                   </div>
                   <p>
-                    Mencatat sampah residu yang tidak bisa didaur ulang secara
-                    jujur.
+                    Log the leftover waste that can't be recycled, honestly.
                   </p>
                 </div>
               </div>
@@ -1772,7 +1766,7 @@ function App() {
           </div>
         </section>
 
-        <section className="download-section" id="unduh">
+        <section className="download-section" id="download">
           <div
             className="seam-photo seam-photo-right seam-can"
             aria-hidden="true"
@@ -1797,21 +1791,20 @@ function App() {
             <div className="download-shell">
               <div className="download-grid">
                 <div className="download-copy" data-reveal="left">
-                  <p className="eyebrow" aria-label="Aplikasi Android">
-                    <KineticText text="Aplikasi Android" />
+                  <p className="eyebrow" aria-label="Android app">
+                    <KineticText text="Android app" />
                   </p>
-                  <h2 aria-label="WasteNot siap digunakan di Android.">
-                    <KineticText text="WasteNot siap digunakan di Android." />
+                  <h2 aria-label="WasteNot is ready for Android.">
+                    <KineticText text="WasteNot is ready for Android." />
                   </h2>
                   <p>
-                    Catat sampah harian, pindai material dengan AI, pelajari
-                    panduan 3R &amp; Trash, dan pantau progres kebiasaanmu
-                    langsung dari ponsel.
+                    Log your daily waste, scan materials with AI, read the
+                    handling guides, and track your habits, all from your phone.
                   </p>
                   <div className="download-highlights">
-                    <span>Kamera &amp; scan AI</span>
-                    <span>Catatan 3R &amp; Trash lengkap</span>
-                    <span>Statistik 7 &amp; 30 hari</span>
+                    <span>Camera and AI scan</span>
+                    <span>Reduce, Reuse, Recycle, and Trash logs</span>
+                    <span>7- and 30-day statistics</span>
                   </div>
                 </div>
                 <div
@@ -1829,7 +1822,7 @@ function App() {
                     />
                     <div>
                       <span className="download-platform">Android APK</span>
-                      <strong>WasteNot untuk Android</strong>
+                      <strong>WasteNot for Android</strong>
                     </div>
                   </div>
                   <ReleaseInfo />
@@ -1838,11 +1831,11 @@ function App() {
                     href="/apk/latest.apk"
                     download="WasteNot-latest.apk"
                   >
-                    Unduh aplikasi Android <Arrow diagonal />
+                    Download the Android app <Arrow diagonal />
                   </a>
                   <small>
-                    File APK diunduh langsung dari server WasteNot. Perangkat
-                    mungkin meminta izin pemasangan aplikasi dari browser.
+                    The APK downloads straight from the WasteNot server. Your
+                    phone may ask you to allow installs from your browser.
                   </small>
                 </div>
               </div>
@@ -1855,37 +1848,37 @@ function App() {
         <div className="container footer-top" data-reveal="up">
           <div className="footer-brand">
             <Brand />
-            <p className="footer-tagline">Catat. Pahami. Lanjutkan.</p>
+            <p className="footer-tagline">Log it. Understand it. Keep going.</p>
             <p className="footer-note">
-              Ruang pribadi untuk mencatat kebiasaan pilah sampah 3R &amp; Trash
-              harian di Android.
+              A private space on Android to log how you reduce, reuse, recycle,
+              and throw away waste every day.
             </p>
           </div>
           <div className="footer-cols">
             <div className="footer-col">
-              <strong>Navigasi</strong>
-              <nav aria-label="Navigasi footer">
-                <a href="#antarmuka">Antarmuka &amp; AI</a>
-                <a href="#manfaat">Manfaat</a>
-                <a href="#tentang">Tentang</a>
-                <a href="#unduh">Unduh Android</a>
-                <a href="/privacy/">Kebijakan privasi</a>
+              <strong>Navigation</strong>
+              <nav aria-label="Footer navigation">
+                <a href="#interface">App &amp; AI</a>
+                <a href="#benefits">Benefits</a>
+                <a href="#about">About</a>
+                <a href="#download">Download for Android</a>
+                <a href="/privacy/">Privacy policy</a>
               </nav>
             </div>
             <div className="footer-col">
-              <strong>Fokus 3R &amp; Trash</strong>
+              <strong>The four methods</strong>
               <ul>
-                <li>Reduce · Kurangi</li>
-                <li>Reuse · Pakai ulang</li>
-                <li>Recycle · Daur ulang</li>
-                <li>Trash · Buang residu</li>
+                <li>Reduce · Use less</li>
+                <li>Reuse · Use again</li>
+                <li>Recycle · Sort for recycling</li>
+                <li>Trash · Dispose of the rest</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} WasteNot</span>
-          <span>Lebih sadar, mulai dari satu catatan.</span>
+          <span>More mindful, one log at a time.</span>
         </div>
       </footer>
     </>
