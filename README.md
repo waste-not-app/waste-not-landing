@@ -1,50 +1,115 @@
-# WasteNot Landing Page
+# WasteNot Landing
 
-Landing page publik untuk aplikasi Android WasteNot, dibangun dengan React 19, TypeScript, dan Vite 8. Tampilan mengikuti [DESIGN.md](https://github.com/waste-not-app/waste-not-android/blob/main/docs/design-kit/DESIGN.md) dari repo Android. Pratinjau ponsel memakai data ilustrasi, dan halaman membedakan fitur yang sudah tersedia dari yang masih direncanakan.
+**The public website and privacy policy for the WasteNot Android app.**
 
-**URL publik:** <https://waste-not.bccdev.id/>
+![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
+![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
+![Vite 8](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![Node 24](https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white)
+![nginx](https://img.shields.io/badge/served%20by-nginx--unprivileged-009639?logo=nginx&logoColor=white)
 
-## Pengembangan
+The site introduces WasteNot, a mobile app for logging household waste through Reduce, Reuse, Recycle, and Trash. It shows the app interface with illustrative data, separates shipped features from planned ones, and links to the latest APK. It also hosts the public privacy policy.
 
-Prasyarat: Node.js 22.12+ (lihat `.nvmrc`, disarankan 24) dan npm.
+**Live site:** <https://waste-not.bccdev.id/>
+
+## Contents
+
+- [Features](#features)
+- [Getting started](#getting-started)
+- [Scripts](#scripts)
+- [Docker](#docker)
+- [Project structure](#project-structure)
+- [Deployment](#deployment)
+- [Privacy policy](#privacy-policy)
+- [Related repositories](#related-repositories)
+
+## Features
+
+- **Single-page site.** Hero, interface preview, benefits, about, and download sections, written in Indonesian for the app's audience.
+- **APK download.** Reads release metadata from `/apk/versions.json` on the same origin and links to `/apk/latest.apk`.
+- **Brand consistency.** Uses the WasteNot design system v1.3 and a self-hosted Plus Jakarta Sans font, with its OFL license, in `public/fonts/`.
+- **Privacy policy.** A standalone static page at `/privacy/` with no JavaScript, forms, or trackers.
+- **Strict security headers.**
+  - A Content Security Policy that allows no inline scripts.
+  - `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, and `Cross-Origin-Opener-Policy`.
+- **Accessibility.**
+  - Follows the system light or dark theme.
+  - Shows visible keyboard focus.
+  - Uses touch-sized navigation targets.
+
+## Getting started
+
+Requirements: Node.js 22.12 or later (24 is recommended; see `.nvmrc`) and npm.
 
 ```sh
 make install   # npm ci
-make dev       # Vite dev server
-make check     # format, lint, audit, type-check, build
+make dev       # start the Vite dev server
+make check     # format check, lint, audit, type-check, and build
 ```
 
-| Target / script | Fungsi |
-|---|---|
-| `make dev` / `npm run dev` | Dev server dengan HMR |
-| `make build` / `npm run build` | Type-check (`tsc -b`) lalu build ke `dist/` |
-| `make fmt` / `npm run format` | Format dengan Prettier |
-| `make lint` / `npm run lint` | ESLint (typescript-eslint, react-hooks) |
-| `make audit` | `npm audit` level high ke atas |
-| `make check` / `npm run check` | Gate kualitas lengkap |
+## Scripts
 
-Vite memakai base path `/`. Font Plus Jakarta Sans disimpan lokal di `public/fonts/` beserta lisensi OFL. Data unduhan APK diambil dari `/apk/versions.json` pada origin yang sama.
+| Make target | npm script | Purpose |
+|---|---|---|
+| `make dev` | `npm run dev` | Dev server with hot module replacement |
+| `make build` | `npm run build` | Type-check with `tsc -b`, then build into `dist/` |
+| `make preview` | `npm run preview` | Serve the production build locally |
+| `make fmt` | `npm run format` | Format with Prettier |
+| `make lint` | `npm run lint` | Lint with ESLint (typescript-eslint and react-hooks) |
+| `make audit` | | Fail on high or critical npm advisories |
+| `make check` | `npm run check` | Full quality gate |
 
 ## Docker
 
 ```sh
-make up     # build image lalu sajikan di http://127.0.0.1:8081
+make up     # build the image and serve it at http://127.0.0.1:8081
 make down
 ```
 
-Image produksi dibangun multi-stage: Node 24 untuk build, lalu `nginx-unprivileged` (port 8080, nonroot, filesystem read-only). Konfigurasi di `deploy/nginx.conf` mengatur fallback SPA, cache jangka panjang untuk `/assets/`, endpoint `/healthz`, dan header keamanan di `deploy/security-headers.conf` (CSP ketat tanpa script inline, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`). Gunakan header yang sama pada Nginx staging.
+The production image is built in two stages: Node 24 builds the site, then `nginx-unprivileged` serves it on port 8080 as a nonroot user. [`deploy/nginx.conf`](deploy/nginx.conf) configures:
 
-## CI/CD
+- the SPA fallback;
+- long-lived caching for `/assets/`;
+- a `/healthz` endpoint;
+- the shared security headers in [`deploy/security-headers.conf`](deploy/security-headers.conf).
 
-- **CI** (`.github/workflows/ci.yml`) berjalan di setiap push dan pull request pada runner self-hosted `landing`: `npm ci`, `npm audit`, lalu `npm run check`.
-- **CD** (`.github/workflows/deploy.yml`) hanya berjalan setelah CI di `main` sukses. Build dan publikasi berada dalam satu job, lalu `rsync` ke `/var/www/wastenot-landing/` dan memeriksa `index.html` serta `privacy/index.html`. Tidak ada secret yang dibutuhkan karena runner berada di host yang sama dengan Nginx.
-- Dependabot memperbarui npm, GitHub Actions, dan base image setiap minggu.
+Apply the same headers on the staging Nginx.
 
-## Nginx staging dan APK
+## Project structure
 
-Konfigurasi Nginx berada di `alberd-staging` pada `/etc/nginx/sites-available/waste-not`. Pipeline Android mengelola `/var/www/wastenot-apk/`. Landing membaca `/apk/versions.json` dan mengunduh `/apk/latest.apk`; versi tertentu tersedia di `/apk/wastenot-v<VERSION>.apk`.
+```
+waste-not-landing/
+├── src/
+│   ├── App.tsx              Page sections and components
+│   ├── main.tsx             React entrypoint
+│   └── styles/              Design tokens and global styles
+├── public/
+│   ├── fonts/               Self-hosted Plus Jakarta Sans and its license
+│   ├── images/              Optimized WebP artwork and favicons
+│   ├── privacy/index.html   Standalone privacy policy
+│   └── scroll-restoration.js
+├── deploy/                  Nginx and security header configuration
+├── Dockerfile               Multi-stage production image
+└── compose.yaml             Local production preview
+```
 
-Untuk halaman `/apk/`, gunakan lokasi exact dengan root distribusi:
+## Deployment
+
+- **CI** (`.github/workflows/ci.yml`) runs on every push and pull request. It installs dependencies with `npm ci`, runs `npm audit`, then runs `npm run check`.
+- **CD** (`.github/workflows/deploy.yml`) runs only after CI succeeds on `main`. A single job builds the site and syncs `dist/` to `/var/www/wastenot-landing/` with `rsync`. It then verifies that `index.html` and `privacy/index.html` exist. The runner lives on the web host, so no deployment secrets are needed.
+- **Dependabot** updates npm packages, GitHub Actions, and base images weekly.
+
+### APK distribution
+
+The Android release pipeline owns `/var/www/wastenot-apk/`:
+
+| URL | Content |
+|---|---|
+| `/apk/versions.json` | Release metadata |
+| `/apk/latest.apk` | Latest build |
+| `/apk/wastenot-v<VERSION>.apk` | A specific version |
+
+Serve the `/apk/` index with an exact location and a root, not an alias:
 
 ```nginx
 location = /apk/ {
@@ -53,23 +118,32 @@ location = /apk/ {
 }
 ```
 
-Jangan memakai alias langsung ke file `index.html` pada URI yang berakhiran `/`, karena modul index Nginx dapat membentuk `index.htmlindex.html` dan menghasilkan HTTP 500. Jalankan `sudo nginx -t` sebelum reload, lalu pastikan `/apk/` mengembalikan HTML 200, `/apk/versions.json` memuat versi terbaru, dan `download_url` mengunduh APK.
+An `alias` that points directly at `index.html` on a URI ending in `/` makes Nginx build `index.htmlindex.html` and return HTTP 500.
 
-## Kebijakan privasi publik
+Run `sudo nginx -t` before reloading. After reloading, confirm three things:
 
-`public/privacy/index.html` disalin Vite apa adanya ke `dist/privacy/index.html`, sehingga URL kanonisnya adalah <https://waste-not.bccdev.id/privacy/>. Halaman ini HTML mandiri, tanpa router SPA, JavaScript, dependensi baru, formulir, atau pelacak. Font dan favicon memakai aset WasteNot yang sudah tersedia. Setelah deploy, pastikan `/privacy/` mengembalikan dokumen kebijakan, bukan fallback landing SPA.
+1. `/apk/` returns HTML with status 200.
+2. `/apk/versions.json` lists the newest version.
+3. Its `download_url` downloads the APK.
 
-Isi bertanggal 16 November 2026 menjelaskan penyimpanan akun/catatan di PostgreSQL, penyimpanan privat foto lampiran, cache scan Android, Room/outbox/draf lokal, token Android Keystore, notifikasi opsional, dan pencarian alamat eksternal tanpa izin lokasi. Foto scan tidak disamakan dengan lampiran permanen. Payload rekomendasi Google Gemini berisi konteks objek dan evidence panduan, bukan foto/nama/email/riwayat akun. Retensi provider tidak diasumsikan nol, dan status billing/provider tidak dijadikan klaim pelatihan atau kepatuhan.
+## Privacy policy
 
-Dasar implementasi pada repositori terkait:
+Vite copies `public/privacy/index.html` unchanged to `dist/privacy/index.html`, so the canonical URL is <https://waste-not.bccdev.id/privacy/>. After each deployment, confirm that `/privacy/` serves the policy rather than the SPA fallback.
 
-- Android: `AndroidManifest.xml`, `data/local/ActivityDatabase.kt`, `LocalEditorDraftStore.kt`, `KeystoreRefreshTokenStore.kt`, `ScanPhotoCache.kt`, `AttachmentImagePreparer.kt`, serta alur penghapusan akun.
-- Backend: `internal/modules/ai/service.go` dan `repository.go` (normalisasi scan, snapshot operasi, kedaluwarsa), `internal/modules/photos/` (normalisasi dan penyimpanan lampiran privat), `internal/modules/logs/repository.go` (soft delete), `internal/database/database.go` (pemeliharaan), serta alur penghapusan akun dan antrean pembersihan foto.
-- AI: `src/wastenot_ai/providers.py` (Google Gemini, payload teks), `src/wastenot_ai/recommendation.py` (proyeksi konteks dan pemilihan evidence). [Ketentuan Gemini API](https://ai.google.dev/gemini-api/terms) dan [privasi Google](https://policies.google.com/privacy) tetap berlaku pada pemrosesan provider.
-- Kontak publik pengelola: [Oktavianus Samuel Minarto](https://github.com/oktavsm), `oktaavsm@student.ub.ac.id`, sesuai identitas publik yang dikonfirmasi. Tidak mengklaim alamat ini sebagai sistem tiket atau menjanjikan waktu balasan.
+The policy describes how the app actually processes data:
 
-Penghapusan database aktif dan pencabutan sesi dibedakan dari pembersihan berkas fisik yang dapat tertunda dan dicoba ulang. Tidak ada janji penghapusan cadangan/arsip lama atau batas retensi universal yang belum diverifikasi. Email reset membutuhkan SMTP yang benar-benar tersedia; halaman tidak menyatakan pengiriman email sudah beroperasi. Ini dokumentasi pemrosesan aktual, bukan persetujuan hukum atau sertifikasi.
+- **Accounts and logs.** Stored in PostgreSQL. Photo attachments are kept in private storage.
+- **On the device.** Room drafts and the outbox stay local, and refresh tokens are protected by the Android Keystore.
+- **Scan photos.** Cached temporarily, not kept as attachments.
+- **AI recommendations.** Requests to Google Gemini contain only object context and guide evidence, never photos or account details.
+- **Account deletion.** Deleting an account removes active data immediately. Physical file cleanup may be retried later.
 
-Arah visual mengikuti situs yang ada: pinus untuk identitas dan tautan, bidang lime hanya untuk ringkasan penting, Plus Jakarta Sans lokal untuk kesinambungan merek. Satu kolom berukuran baca menjaga teks panjang pada ponsel; heading dan jarak memisahkan topik tanpa deretan kartu promosi. Tema mengikuti preferensi sistem terang/gelap, fokus keyboard memiliki outline, tautan navigasi berukuran sentuh, dan tidak ada animasi. Design read: kebijakan layanan untuk pengguna WasteNot, utilitarian ramah, ENERGY 1 / RHYTHM 1 / MOTION 1.
+Update the policy whenever the Android app, the backend, or the AI workers change what they collect or how long they keep it.
 
-Verifikasi lokal: `npm run build` lulus; browser membuka kebijakan melalui tautan footer, anchor isi valid, dan dokumen tidak meluber horizontal pada lebar 320 px gelap serta 390 px terang. Tidak ada error runtime browser. Verifikasi HTTP publik tetap diperlukan sesudah CD.
+## Related repositories
+
+| Repository | Description |
+|---|---|
+| [waste-not-android](https://github.com/waste-not-app/waste-not-android) | Android client |
+| [waste-not-backend](https://github.com/waste-not-app/waste-not-backend) | REST API |
+| [waste-not-ai](https://github.com/waste-not-app/waste-not-ai) | Detection and recommendation workers |
