@@ -5,7 +5,7 @@
 ![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)
 ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)
 ![Vite 8](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
-![Node 24](https://img.shields.io/badge/Node-24-5FA04E?logo=nodedotjs&logoColor=white)
+![Node 26](https://img.shields.io/badge/Node-26-5FA04E?logo=nodedotjs&logoColor=white)
 ![nginx](https://img.shields.io/badge/served%20by-nginx--unprivileged-009639?logo=nginx&logoColor=white)
 
 This is the website for WasteNot, an app for logging household waste as Reduce, Reuse, Recycle, or Trash. It walks visitors through the app with sample data, keeps shipped features apart from planned ones, and links to the latest APK. It also hosts the privacy policy.
@@ -62,7 +62,7 @@ make up     # build the image and serve it at http://127.0.0.1:8081
 make down
 ```
 
-The production image is built in two stages. Node 24 builds the site, then `nginx-unprivileged` serves it on port 8080 as a nonroot user. [`deploy/nginx.conf`](deploy/nginx.conf) sets up the SPA fallback, long-lived caching for `/assets/`, a `/healthz` endpoint, and the shared headers in [`deploy/security-headers.conf`](deploy/security-headers.conf). Use the same headers on the staging Nginx.
+The production image is built in two stages. Node 26 builds the site, then `nginx-unprivileged` serves it on port 8080 as a nonroot user. [`deploy/nginx.conf`](deploy/nginx.conf) sets up the SPA fallback, long-lived caching for `/assets/`, a `/healthz` endpoint, and the shared headers in [`deploy/security-headers.conf`](deploy/security-headers.conf). Use the same headers on the staging Nginx.
 
 ## Project structure
 
