@@ -47,7 +47,7 @@
     <a href="mailto:oktaavsm@student.ub.ac.id">Contact the maintainer</a>
   </header>
   <main id="content">
-    <p class="date">Updated 16 November 2026</p>
+    <p class="date">Updated 25 November 2026</p>
     <h1>Privacy policy</h1>
     <p>This page explains how data is processed by the WasteNot Android app, the API at waste-not-api.bccdev.id, and the public WasteNot pages. The maintainer is Oktavianus Samuel Minarto. You can send questions and data requests to <a href="mailto:oktaavsm@student.ub.ac.id">oktaavsm@student.ub.ac.id</a>.</p>
     <div class="summary">
@@ -66,7 +66,8 @@
     <section id="data">
       <h2>Data we process and why</h2>
       <ul>
-        <li>Your name, email address, time zone, and account ID are used for registration, signing in, and dating your activities. The server stores a hash of your password, never a password that can be read back.</li>
+        <li>Your name, email address, time zone, and account ID are used for registration, signing in, and dating your activities. If your account has a password, the server stores its hash, not a password that can be read back.</li>
+        <li>If you sign in with Google, WasteNot uses a short-lived Google ID token to verify your identity. It uses your Google account identifier to recognize you and may use your verified email address and name to set up your WasteNot account. It does not retain Google ID tokens or ask for access to your mail, files, or contacts. Google handles sign-in under the <a href="https://policies.google.com/privacy">Google privacy policy</a>.</li>
         <li>Session tokens and their expiry are used to authenticate you and to revoke access. You never need to send your access or refresh tokens to the maintainer.</li>
         <li>Activity logs contain the waste category, handling method, weight or count, date, text notes, and optional attachments. The server uses them for your history, statistics, XP, and achievements.</li>
         <li>Request IDs and log versions are used to sync your data, prevent duplicate entries, and resolve conflicting edits.</li>
@@ -102,12 +103,12 @@
       <ul>
         <li>Deleting a log removes it from your active history and totals. The backend marks deleted logs instead of erasing them, so deleting one log is not a promise that its database row is destroyed right away.</li>
         <li>Attachments that you detach, delete, or never use may be deactivated first. Cleaning up the physical file is separate from the database change and can be delayed or fail. The expiry of a temporary attachment is not a promise that the file is destroyed on time.</li>
-        <li>To delete your account, open Profile, then Settings, then Delete account. Read the confirmation and enter your current password. Once the server accepts the deletion, your account's data in the active database is deleted and your sessions are revoked. Private photo cleanup runs separately with retries, so files may remain until it succeeds.</li>
+        <li>To delete your account, open Profile, then Settings, then Delete account. Read the confirmation and verify your identity with your current WasteNot password or, for an account without a password, with Google. Once the server accepts the deletion, your account's data in the active database is deleted and your sessions are revoked. Private photo cleanup runs separately with retries, so files may remain until it succeeds.</li>
         <li>The app clears your account's local data when the deletion succeeds. If the request fails or your device is offline, don't assume your server account is gone. Follow the app's message or contact the maintainer.</li>
       </ul>
       <p>Database backups, operational archives, infrastructure logs, data on your other devices, and data the provider has already processed may be kept for different periods. Deleting data from the active systems doesn't automatically destroy older backups or archives. We haven't yet published a guaranteed time limit for deleting every backup; contact the maintainer for the current details.</p>
       <p>If you can't sign in, send a deletion request to the <a href="mailto:oktaavsm@student.ub.ac.id?subject=WasteNot%20account%20deletion%20request">maintainer's email</a>, from your account's address if you can. The maintainer has to verify that the account is yours before acting. Don't send passwords, session tokens, recovery codes, or identity documents unless the maintainer asks for them through a process they explain.</p>
-      <p>Password recovery by email only works when the server's email delivery is configured and available. An error message from the service does not mean an email was sent.</p>
+      <p>Password recovery by email only works for accounts with a WasteNot password when the server's email delivery is configured and available. If you joined with Google and have no WasteNot password, sign in with the same Google account. An error message from email recovery does not mean an email was sent.</p>
     </section>
     <section id="contact" class="contact">
       <h2>Contact and policy changes</h2>
