@@ -1695,43 +1695,43 @@ button {
   pointer-events: none;
 }
 
+/* The viewfinder is 186px tall, so the line travels from 12px to 172px. It
+   moves with a transform so the sweep never triggers layout. */
 @keyframes aiScanSweep {
-  0% {
-    top: 12px;
-  }
-  100% {
-    top: calc(100% - 14px);
+  to {
+    transform: translate3d(0, 160px, 0);
   }
 }
 
 @keyframes aiScanRealistic {
   0% {
-    top: 12px;
+    transform: none;
     opacity: 0;
   }
   8% {
     opacity: 1;
   }
   33% {
-    top: calc(100% - 14px);
+    transform: translate3d(0, 160px, 0);
     opacity: 1;
   }
   66% {
-    top: 12px;
+    transform: none;
     opacity: 1;
   }
   92% {
-    top: calc(100% - 14px);
+    transform: translate3d(0, 160px, 0);
     opacity: 1;
   }
   100% {
-    top: calc(100% - 14px);
+    transform: translate3d(0, 160px, 0);
     opacity: 0;
   }
 }
 
 .ai-scan-line {
   position: absolute;
+  top: 12px;
   left: 12px;
   right: 12px;
   height: 2px;
