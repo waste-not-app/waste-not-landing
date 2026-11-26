@@ -8,7 +8,8 @@ import {
 import { AndroidScreen } from "./components/AndroidScreen";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
-import { HeroPhone } from "./components/HeroPhone";
+import { CountUp } from "./components/CountUp";
+import { Marquee } from "./components/Marquee";
 import { HeroWBackdrop } from "./components/HeroWBackdrop";
 import { RevealText } from "./components/RevealText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
@@ -17,6 +18,7 @@ import { simulatorTabs } from "./data/screens";
 import {
   useMediaQuery,
   usePointerParallax,
+  usePointerSurfaces,
   useScrollSteps,
 } from "./hooks";
 import type { ScreenId } from "./types";
@@ -47,6 +49,7 @@ function App() {
   const stepLockUntil = useRef(0);
   const stickyDemo = useMediaQuery("(min-width: 981px)");
   usePointerParallax(heroStageRef);
+  usePointerSurfaces();
   const isStepLocked = useCallback(
     () => performance.now() < stepLockUntil.current,
     [],
@@ -181,7 +184,7 @@ function App() {
 
           <div className="header-actions">
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
-            <a className="header-cta" href="#download">
+            <a className="header-cta" href="#download" data-magnetic>
               Get the app <Arrow diagonal />
             </a>
             <button
@@ -257,10 +260,6 @@ function App() {
         <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
-              <p className="hero-badge">
-                <span className="hero-badge-dot" aria-hidden="true" />
-                Android app with an AI scan
-              </p>
               <h1>
                 <RevealText
                   text="Good habits start with a single log."
@@ -276,6 +275,7 @@ function App() {
                 <a
                   className="button button-primary"
                   href="#interface"
+                  data-magnetic
                   onClick={() => {
                     lockSteps(stepLockUntil, 1200);
                     setActiveScreen("ai");
@@ -295,28 +295,18 @@ function App() {
                 <AndroidScreen screen="ai" />
               </div>
 
-              <HeroPhone />
+              <div className="trio-center">
+                <AndroidScreen screen="home" />
+              </div>
 
               <div className="trio-side trio-right">
                 <AndroidScreen screen="stats" />
               </div>
-
-              <div className="hero-chips" aria-hidden="true">
-                <span className="hero-chip chip-a">
-                  <span className="chip-icon">✓</span>
-                  Logged · Plastic 250 g
-                </span>
-                <span className="hero-chip chip-b">
-                  <span className="chip-icon lime">✦</span>2 items avoided
-                </span>
-                <span className="hero-chip chip-c">
-                  <span className="chip-icon">↑</span>
-                  Level 1 · 50 XP
-                </span>
-              </div>
             </div>
           </div>
         </section>
+
+        <Marquee />
 
         <section className="section showcase-section" id="interface">
           <div className="container showcase-grid">
@@ -424,6 +414,7 @@ function App() {
             <div className="editorial-cards">
               <article
                 className="editorial-card"
+                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "0ms" } as CSSProperties}
               >
@@ -447,13 +438,16 @@ function App() {
 
               <article
                 className="editorial-card editorial-card-chart"
+                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "80ms" } as CSSProperties}
               >
                 <div className="editorial-chart-stage" aria-hidden="true">
                   <div className="editorial-chart-head">
                     <span>Last 7 days</span>
-                    <strong>2.45 kg</strong>
+                    <strong>
+                      <CountUp value={2.45} decimals={2} /> kg
+                    </strong>
                   </div>
                   <div className="editorial-chart-bars">
                     {[
@@ -492,6 +486,7 @@ function App() {
 
               <article
                 className="editorial-card"
+                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "160ms" } as CSSProperties}
               >
@@ -755,6 +750,7 @@ function App() {
                   <ReleaseInfo />
                   <a
                     className="button button-lime"
+                    data-magnetic
                     href="/apk/latest.apk"
                     download="WasteNot-latest.apk"
                   >
