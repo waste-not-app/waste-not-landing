@@ -160,6 +160,90 @@
   background: var(--surface);
 }
 
+/* Static fades over both edges instead of a mask, so the moving track is
+   never re-masked on every frame. */
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 12%;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--surface), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--surface), transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-row {
+  display: flex;
+  gap: 44px;
+  padding-right: 44px;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: clamp(20px, 2.4vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.marquee-item.tone-lime {
+  color: var(--primary);
+}
+
+.marquee-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  rotate: 45deg;
+  background: var(--primary);
+}
+
+.tone-lime .marquee-dot {
+  background: var(--accent);
+}
+.tone-sand .marquee-dot {
+  background: #d8b46a;
+}
+.tone-sky .marquee-dot {
+  background: #7db7c8;
+}
+.tone-steel .marquee-dot {
+  background: #9aa8a0;
+}
+.tone-leaf .marquee-dot {
+  background: #69b832;
+}
+
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 /* Magnetic buttons ------------------------------------------------------- */
 [data-magnetic] {
   translate: calc(var(--mx, 0) * 7px) calc(var(--my, 0) * 6px);
@@ -232,6 +316,11 @@
 [data-tilt]:hover::before {
   opacity: 1;
   will-change: translate;
+}
+
+/* Benefits cards lift a little while tilted. */
+.editorial-card:hover {
+  box-shadow: 0 24px 48px rgba(18, 63, 48, 0.14);
 }
 
 /* Floating seam objects -------------------------------------------------- */
@@ -505,6 +594,154 @@
   }
 }
 
+/* Offline queue demo: logs wait, then fly up into the cloud. */
+.queue-demo {
+  position: relative;
+  height: 96px;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.queue-cloud {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.queue-cloud svg {
+  width: 28px;
+  height: 28px;
+}
+
+.queue-item {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bento-offline.is-visible .queue-item {
+  animation: queueSync 4.8s var(--ease-out) calc(600ms + var(--i) * 380ms)
+    infinite;
+}
+
+@keyframes queueSync {
+  0%,
+  58% {
+    opacity: 1;
+    transform: none;
+  }
+  72% {
+    opacity: 0;
+    transform: translate3d(70px, -58px, 0) scale(0.5);
+  }
+  73% {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  84%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Level ring */
+.level-ring {
+  position: relative;
+  width: 96px;
+  height: 96px;
+}
+
+.level-ring svg {
+  width: 100%;
+  height: 100%;
+  rotate: -90deg;
+}
+
+.ring-track,
+.ring-fill {
+  fill: none;
+  stroke-width: 8;
+}
+
+.ring-track {
+  stroke: var(--soft);
+}
+
+.ring-fill {
+  stroke: var(--primary);
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1600ms var(--ease-out) 400ms;
+}
+
+.bento-level.is-visible .ring-fill {
+  stroke-dashoffset: 0.5;
+}
+
+.bento-level:hover .ring-fill {
+  stroke-dashoffset: 0.32;
+  transition-duration: 700ms;
+  transition-delay: 0ms;
+}
+
+.level-ring strong {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* Install steps --------------------------------------------------------- */
+.install-steps {
+  counter-reset: step;
+  list-style: none;
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.install-steps li {
+  counter-increment: step;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--ink);
+}
+
+.install-steps li::before {
+  content: counter(step);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--primary-soft);
+  color: var(--on-primary-soft);
+  font-size: 12px;
+  font-weight: 800;
+}
+
 /* FAQ --------------------------------------------------------------------- */
 .faq-grid {
   display: grid;
@@ -626,6 +863,31 @@
     opacity: 0;
     translate: 0 -6px;
   }
+}
+
+/* Giant footer wordmark ------------------------------------------------ */
+.footer-wordmark {
+  padding-top: var(--space-4);
+  font-size: clamp(64px, 17vw, 240px);
+  line-height: 0.9;
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: transparent;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 18%, transparent),
+    transparent 96%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  user-select: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.footer-wordmark span {
+  color: color-mix(in srgb, var(--accent) 80%, transparent);
+  -webkit-text-fill-color: color-mix(in srgb, var(--accent) 80%, transparent);
 }
 
 /* Responsive ------------------------------------------------------------- */
