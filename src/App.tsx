@@ -9,7 +9,10 @@ import { AndroidScreen } from "./components/AndroidScreen";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
 import { CountUp } from "./components/CountUp";
+import { Faq } from "./components/Faq";
 import { Marquee } from "./components/Marquee";
+import { MoreFeatures } from "./components/MoreFeatures";
+import { ScanFlow } from "./components/ScanFlow";
 import { HeroWBackdrop } from "./components/HeroWBackdrop";
 import { RevealText } from "./components/RevealText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
@@ -178,8 +181,9 @@ function App() {
 
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#interface">App &amp; AI</a>
+            <a href="#scan">How it works</a>
             <a href="#benefits">Benefits</a>
-            <a href="#about">About</a>
+            <a href="#faq">FAQ</a>
           </nav>
 
           <div className="header-actions">
@@ -238,11 +242,18 @@ function App() {
                 Benefits
               </a>
               <a
-                href="#about"
+                href="#scan"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                About
+                How it works
+              </a>
+              <a
+                href="#faq"
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => setMenuOpen(false)}
+              >
+                FAQ
               </a>
               <a
                 href="#download"
@@ -381,6 +392,8 @@ function App() {
             </div>
           </div>
         </section>
+
+        <ScanFlow />
 
         <section className="section benefits" id="benefits">
           <div
@@ -690,6 +703,8 @@ function App() {
           </div>
         </section>
 
+        <MoreFeatures />
+
         <section className="download-section" id="download">
           <div
             className="seam-photo seam-photo-right seam-can"
@@ -765,6 +780,7 @@ function App() {
             </div>
           </div>
         </section>
+        <Faq />
       </main>
 
       <footer className="footer">
@@ -783,7 +799,9 @@ function App() {
               <nav aria-label="Footer navigation">
                 <a href="#interface">App &amp; AI</a>
                 <a href="#benefits">Benefits</a>
+                <a href="#scan">How it works</a>
                 <a href="#about">About</a>
+                <a href="#faq">FAQ</a>
                 <a href="#download">Download for Android</a>
                 <a href="/privacy/">Privacy policy</a>
               </nav>
