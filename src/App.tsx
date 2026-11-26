@@ -10,6 +10,7 @@ import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
 import { CountUp } from "./components/CountUp";
 import { Faq } from "./components/Faq";
+import { HeroPhone } from "./components/HeroPhone";
 import { Marquee } from "./components/Marquee";
 import { MoreFeatures } from "./components/MoreFeatures";
 import { ScanFlow } from "./components/ScanFlow";
@@ -271,6 +272,10 @@ function App() {
         <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
+              <p className="hero-badge">
+                <span className="hero-badge-dot" aria-hidden="true" />
+                Android app with an AI scan
+              </p>
               <h1>
                 <RevealText
                   text="Good habits start with a single log."
@@ -306,12 +311,24 @@ function App() {
                 <AndroidScreen screen="ai" />
               </div>
 
-              <div className="trio-center">
-                <AndroidScreen screen="home" />
-              </div>
+              <HeroPhone />
 
               <div className="trio-side trio-right">
                 <AndroidScreen screen="stats" />
+              </div>
+
+              <div className="hero-chips" aria-hidden="true">
+                <span className="hero-chip chip-a">
+                  <span className="chip-icon">✓</span>
+                  Logged · Plastic 250 g
+                </span>
+                <span className="hero-chip chip-b">
+                  <span className="chip-icon lime">✦</span>2 items avoided
+                </span>
+                <span className="hero-chip chip-c">
+                  <span className="chip-icon">↑</span>
+                  Level 1 · 50 XP
+                </span>
               </div>
             </div>
           </div>
@@ -771,9 +788,14 @@ function App() {
                   >
                     Download the Android app <Arrow diagonal />
                   </a>
+                  <ol className="install-steps">
+                    <li>Download the APK on your Android phone.</li>
+                    <li>Open the file and allow installs from your browser.</li>
+                    <li>Open WasteNot and create your account.</li>
+                  </ol>
                   <small>
-                    The APK downloads straight from the WasteNot server. Your
-                    phone may ask you to allow installs from your browser.
+                    Needs Android 11 or newer. The APK downloads straight from
+                    the WasteNot server.
                   </small>
                 </div>
               </div>
@@ -816,6 +838,9 @@ function App() {
               </ul>
             </div>
           </div>
+        </div>
+        <div className="container footer-wordmark" aria-hidden="true">
+          WasteNot<span>.</span>
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} WasteNot</span>
