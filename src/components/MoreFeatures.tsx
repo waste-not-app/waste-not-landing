@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { RevealText } from "./RevealText";
+import { KineticText } from "./KineticText";
 
 const sw = {
   stroke: "currentColor",
@@ -14,9 +14,11 @@ export function MoreFeatures() {
     <section className="section more" id="more">
       <div className="container">
         <div className="section-head" data-reveal="up">
-          <p className="eyebrow">Also in the app</p>
+          <p className="eyebrow">
+            <KineticText text="Also in the app" />
+          </p>
           <h2>
-            <RevealText text="The small things that keep you going." />
+            <KineticText text="The small things that keep you going." />
           </h2>
         </div>
 

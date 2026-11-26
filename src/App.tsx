@@ -9,15 +9,12 @@ import { AndroidScreen } from "./components/AndroidScreen";
 import { ApkQr } from "./components/ApkQr";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
-import { CountUp } from "./components/CountUp";
 import { Faq } from "./components/Faq";
-import { HeroPhone } from "./components/HeroPhone";
 import { Marquee } from "./components/Marquee";
 import { MoreFeatures } from "./components/MoreFeatures";
-import { OpenSource } from "./components/OpenSource";
 import { ScanFlow } from "./components/ScanFlow";
 import { HeroWBackdrop } from "./components/HeroWBackdrop";
-import { RevealText } from "./components/RevealText";
+import { KineticText } from "./components/KineticText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { simulatorTabs } from "./data/screens";
@@ -394,9 +391,11 @@ function App() {
           </div>
           <div className="container">
             <div className="section-head" data-reveal="up">
-              <p className="eyebrow">What it does</p>
+              <p className="eyebrow">
+                <KineticText text="What it does" />
+              </p>
               <h2>
-                <RevealText text="Caring is easier when things are clear." />
+                <KineticText text="Caring is easier when things are clear." />
               </h2>
               <p>Three things that make good habits feel lighter.</p>
             </div>
@@ -530,9 +529,11 @@ function App() {
           </div>
           <div className="container about-grid">
             <div className="about-copy" data-reveal="left">
-              <p className="eyebrow">Built for real habits</p>
+              <p className="eyebrow">
+                <KineticText text="Built for real habits" />
+              </p>
               <h2>
-                <RevealText text="More than counting trash." />
+                <KineticText text="More than counting trash." />
               </h2>
               <p>
                 WasteNot is a private space to record everyday choices,
@@ -707,9 +708,11 @@ function App() {
             <div className="download-shell">
               <div className="download-grid">
                 <div className="download-copy" data-reveal="left">
-                  <p className="eyebrow">Android app</p>
+                  <p className="eyebrow">
+                    <KineticText text="Android app" />
+                  </p>
                   <h2>
-                    <RevealText text="WasteNot is ready for Android." />
+                    <KineticText text="WasteNot is ready for Android." />
                   </h2>
                   <p>
                     Log your daily waste, scan materials with AI, read the
