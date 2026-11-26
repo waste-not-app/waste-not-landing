@@ -1,6 +1,7 @@
+import { memo } from "react";
 import type { ScreenId } from "../types";
 
-export function AndroidScreen({
+export const AndroidScreen = memo(function AndroidScreen({
   screen,
   onSelectScreen,
   interactive = false,
@@ -799,4 +800,4 @@ export function AndroidScreen({
       )}
     </div>
   );
-}
+});
