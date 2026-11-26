@@ -9,7 +9,7 @@ import { AndroidScreen } from "./components/AndroidScreen";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
 import { HeroWBackdrop } from "./components/HeroWBackdrop";
-import { KineticText } from "./components/KineticText";
+import { RevealText } from "./components/RevealText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { simulatorTabs } from "./data/screens";
@@ -246,8 +246,8 @@ function App() {
         <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
-              <h1 aria-label="Good habits start with a single log.">
-                <KineticText
+              <h1>
+                <RevealText
                   text="Good habits start with a single log."
                   accent="a single log."
                 />
@@ -290,16 +290,14 @@ function App() {
 
         <section className="section showcase-section" id="interface">
           <div className="container showcase-grid">
-            <div className="showcase-copy" data-reveal="left">
-              <p className="eyebrow" aria-label="Explore the app">
-                <KineticText text="Explore the app" />
-              </p>
-              <h2 aria-label="Every main feature, including the AI scan.">
-                <KineticText text="Every main feature, including the AI scan." />
+            <div className="showcase-copy" data-reveal="up">
+              <p className="eyebrow">Explore the app</p>
+              <h2>
+                <RevealText text="Every main feature, including the AI scan." />
               </h2>
               <p className="showcase-lede">
-                Pick a screen below, or tap the navigation icons on the phone,
-                to walk through each feature, including the AI scan.
+                Scroll through the features, pick one, or tap the phone itself.
+                Every screen uses sample data.
               </p>
 
               <div
@@ -370,11 +368,9 @@ function App() {
           </div>
           <div className="container">
             <div className="section-head" data-reveal="up">
-              <p className="eyebrow" aria-label="What it does">
-                <KineticText text="What it does" />
-              </p>
-              <h2 aria-label="Caring is easier when things are clear.">
-                <KineticText text="Caring is easier when things are clear." />
+              <p className="eyebrow">What it does</p>
+              <h2>
+                <RevealText text="Caring is easier when things are clear." />
               </h2>
               <p>Three things that make good habits feel lighter.</p>
             </div>
@@ -498,11 +494,9 @@ function App() {
           </div>
           <div className="container about-grid">
             <div className="about-copy" data-reveal="left">
-              <p className="eyebrow" aria-label="Built for real habits">
-                <KineticText text="Built for real habits" />
-              </p>
-              <h2 aria-label="More than counting trash.">
-                <KineticText text="More than counting trash." />
+              <p className="eyebrow">Built for real habits</p>
+              <h2>
+                <RevealText text="More than counting trash." />
               </h2>
               <p>
                 WasteNot is a private space to record everyday choices,
@@ -675,11 +669,9 @@ function App() {
             <div className="download-shell">
               <div className="download-grid">
                 <div className="download-copy" data-reveal="left">
-                  <p className="eyebrow" aria-label="Android app">
-                    <KineticText text="Android app" />
-                  </p>
-                  <h2 aria-label="WasteNot is ready for Android.">
-                    <KineticText text="WasteNot is ready for Android." />
+                  <p className="eyebrow">Android app</p>
+                  <h2>
+                    <RevealText text="WasteNot is ready for Android." />
                   </h2>
                   <p>
                     Log your daily waste, scan materials with AI, read the
