@@ -309,23 +309,23 @@ button {
    so the page does not hold a compositor layer for every section. */
 [data-reveal] {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  translate: 0 24px;
   transition:
     opacity 560ms var(--ease-out) var(--reveal-delay, 0ms),
-    transform 640ms var(--ease-out) var(--reveal-delay, 0ms);
+    translate 640ms var(--ease-out) var(--reveal-delay, 0ms);
 }
 
 [data-reveal="left"] {
-  transform: translate3d(-24px, 0, 0);
+  translate: -24px 0;
 }
 
 [data-reveal="right"] {
-  transform: translate3d(24px, 0, 0);
+  translate: 24px 0;
 }
 
 [data-reveal].is-visible {
   opacity: 1;
-  transform: none;
+  translate: none;
 }
 
 /* Word-by-word heading reveal (RevealText) */
@@ -3337,11 +3337,9 @@ button {
     flex-direction: column;
     gap: var(--space-1);
   }
-  [data-reveal="left"] {
-    transform: translateY(24px);
-  }
+  [data-reveal="left"],
   [data-reveal="right"] {
-    transform: translateY(24px);
+    translate: 0 24px;
   }
   .seam-photo {
     top: -40px;
@@ -3435,7 +3433,7 @@ button {
   }
   [data-reveal] {
     opacity: 1;
-    transform: none;
+    translate: none;
     transition: none;
   }
   .screen-pane,
