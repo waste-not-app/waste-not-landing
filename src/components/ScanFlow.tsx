@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { RevealText } from "./RevealText";
+import { KineticText } from "./KineticText";
 
 const stroke = {
   stroke: "currentColor",
@@ -107,9 +107,11 @@ export function ScanFlow() {
     <section className="section scan-flow" id="scan">
       <div className="container">
         <div className="section-head" data-reveal="up">
-          <p className="eyebrow">How a scan works</p>
+          <p className="eyebrow">
+            <KineticText text="How a scan works" />
+          </p>
           <h2>
-            <RevealText text="Four quick steps, and you stay in charge." />
+            <KineticText text="Four quick steps, and you stay in charge." />
           </h2>
           <p>
             The AI only suggests. You check the item, answer what it can't see,

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { RevealText } from "./RevealText";
+import { KineticText } from "./KineticText";
 
 const questions: { q: string; a: ReactNode }[] = [
   {
@@ -39,9 +39,11 @@ export function Faq() {
     <section className="section faq" id="faq">
       <div className="container faq-grid">
         <div className="faq-head" data-reveal="up">
-          <p className="eyebrow">Questions</p>
+          <p className="eyebrow">
+            <KineticText text="Questions" />
+          </p>
           <h2>
-            <RevealText text="Good to know before you start." />
+            <KineticText text="Good to know before you start." />
           </h2>
           <p>
             Still unsure about something? The{" "}
