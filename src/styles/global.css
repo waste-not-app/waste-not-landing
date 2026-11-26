@@ -2503,17 +2503,9 @@ button {
   height: var(--bar-h, 50%);
   border-radius: 8px;
   background: var(--primary-soft);
-  transform: scaleY(0.04);
   transform-origin: bottom center;
   transition:
     transform 360ms var(--ease-standard),
-    background-color 280ms var(--ease-standard);
-}
-
-.editorial-card.is-visible .editorial-bar {
-  transform: none;
-  transition:
-    transform 900ms var(--ease-out) calc(260ms + var(--i, 0) * 70ms),
     background-color 280ms var(--ease-standard);
 }
 
@@ -2521,11 +2513,8 @@ button {
   background: linear-gradient(180deg, var(--pine-end), var(--pine-start));
 }
 
-.editorial-card.is-visible .editorial-bar-col:hover .editorial-bar {
+.editorial-bar-col:hover .editorial-bar {
   transform: scaleY(1.12);
-  transition:
-    transform 360ms var(--ease-standard),
-    background-color 280ms var(--ease-standard);
   background: var(--primary);
 }
 
