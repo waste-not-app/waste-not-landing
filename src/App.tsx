@@ -8,14 +8,20 @@ import {
 import { AndroidScreen } from "./components/AndroidScreen";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
+import { HeroPhone } from "./components/HeroPhone";
 import { HeroWBackdrop } from "./components/HeroWBackdrop";
 import { RevealText } from "./components/RevealText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { simulatorTabs } from "./data/screens";
-import { useMediaQuery, usePointerParallax, useScrollSteps } from "./hooks";
+import {
+  useMediaQuery,
+  usePointerParallax,
+  useScrollSteps,
+} from "./hooks";
 import type { ScreenId } from "./types";
 import "./styles/global.css";
+import "./styles/sections.css";
 
 /** Pauses scroll-synced step changes while a programmatic scroll runs. */
 function lockSteps(until: { current: number }, ms: number) {
@@ -251,6 +257,10 @@ function App() {
         <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
+              <p className="hero-badge">
+                <span className="hero-badge-dot" aria-hidden="true" />
+                Android app with an AI scan
+              </p>
               <h1>
                 <RevealText
                   text="Good habits start with a single log."
@@ -285,12 +295,24 @@ function App() {
                 <AndroidScreen screen="ai" />
               </div>
 
-              <div className="trio-center">
-                <AndroidScreen screen="home" />
-              </div>
+              <HeroPhone />
 
               <div className="trio-side trio-right">
                 <AndroidScreen screen="stats" />
+              </div>
+
+              <div className="hero-chips" aria-hidden="true">
+                <span className="hero-chip chip-a">
+                  <span className="chip-icon">✓</span>
+                  Logged · Plastic 250 g
+                </span>
+                <span className="hero-chip chip-b">
+                  <span className="chip-icon lime">✦</span>2 items avoided
+                </span>
+                <span className="hero-chip chip-c">
+                  <span className="chip-icon">↑</span>
+                  Level 1 · 50 XP
+                </span>
               </div>
             </div>
           </div>

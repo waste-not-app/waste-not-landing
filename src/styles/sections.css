@@ -1,0 +1,152 @@
+/* ==========================================================================
+   Motion layer and the newer sections. Everything that moves here animates
+   transform, translate, rotate, scale, opacity, or a small SVG stroke, so it
+   stays on the compositor in Gecko and Blink alike.
+   ========================================================================== */
+
+/* Hero badge -------------------------------------------------------------- */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+  padding: 6px 14px 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--divider);
+  background: var(--surface);
+  color: var(--on-primary-soft);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: var(--shadow-card);
+}
+
+.hero-badge-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.hero-badge-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--primary);
+  animation: badgePing 2.4s var(--ease-out) infinite;
+}
+
+@keyframes badgePing {
+  70%,
+  100% {
+    opacity: 0;
+    scale: 3;
+  }
+}
+
+/* Hero center phone progress dots ---------------------------------------- */
+.hero-dots {
+  position: absolute;
+  left: 50%;
+  bottom: -26px;
+  translate: -50% 0;
+  display: flex;
+  gap: 6px;
+}
+
+.hero-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--divider);
+  transition:
+    width 400ms var(--ease-out),
+    background-color 400ms var(--ease-out);
+}
+
+.hero-dots span.is-active {
+  width: 20px;
+  background: var(--primary);
+}
+
+/* Floating hero chips ----------------------------------------------------- */
+.hero-chips {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.hero-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 9px 9px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--divider);
+  box-shadow: 0 14px 30px rgba(18, 63, 48, 0.14);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  translate: calc(var(--px) * var(--depth, 24px))
+    calc(var(--py) * var(--depth, 24px));
+  transition: translate 700ms var(--ease-out);
+  animation:
+    chipIn 800ms var(--ease-out) var(--chip-delay, 1100ms) backwards,
+    chipFloat 5.5s ease-in-out var(--chip-delay, 1100ms) infinite alternate;
+}
+
+.chip-icon {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 9px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-size: 13px;
+}
+
+.chip-icon.lime {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.chip-a {
+  left: 4%;
+  top: 22%;
+  --depth: -30px;
+  --chip-delay: 1100ms;
+}
+
+.chip-b {
+  right: 3%;
+  top: 14%;
+  --depth: 34px;
+  --chip-delay: 1300ms;
+}
+
+.chip-c {
+  right: 9%;
+  bottom: 14%;
+  --depth: -22px;
+  --chip-delay: 1500ms;
+}
+
+@keyframes chipIn {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@keyframes chipFloat {
+  to {
+    transform: translate3d(0, -12px, 0) rotate(-1.5deg);
+  }
+}
+
