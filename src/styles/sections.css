@@ -98,24 +98,6 @@
   }
 }
 
-/* Magnetic buttons ------------------------------------------------------- */
-[data-magnetic] {
-  translate: calc(var(--mx, 0) * 7px) calc(var(--my, 0) * 6px);
-  transition:
-    color var(--duration-fast) var(--ease-standard),
-    background-color var(--duration-fast) var(--ease-standard),
-    box-shadow var(--duration-fast) var(--ease-standard),
-    translate 420ms var(--ease-out);
-}
-
-[data-magnetic] .btn-arrow {
-  transition: translate 420ms var(--ease-out);
-}
-
-[data-magnetic]:hover .btn-arrow {
-  translate: 3px -3px;
-}
-
 /* Tilt cards with a pointer glare -------------------------------------- */
 [data-tilt] {
   transform: perspective(1000px) rotateX(calc(var(--my, 0) * -5deg))
@@ -170,44 +152,6 @@
 [data-tilt]:hover::before {
   opacity: 1;
   will-change: translate;
-}
-
-/* Benefits cards lift a little while tilted. */
-.editorial-card:hover {
-  box-shadow: 0 24px 48px rgba(18, 63, 48, 0.14);
-}
-
-/* Floating seam objects -------------------------------------------------- */
-.seam-photo {
-  animation: seamFloat 6.5s ease-in-out infinite alternate;
-}
-
-.seam-box {
-  animation-duration: 7.5s;
-  animation-delay: -2s;
-}
-
-.seam-can {
-  animation-duration: 5.8s;
-  animation-delay: -4s;
-}
-
-@keyframes seamFloat {
-  to {
-    translate: 0 -14px;
-  }
-}
-
-/* Pillar icons draw themselves in ------------------------------------- */
-.pillar-icon svg :is(path, circle) {
-  stroke-dasharray: 64;
-  stroke-dashoffset: 64;
-  transition: stroke-dashoffset 1100ms var(--ease-out)
-    calc(var(--reveal-delay, 0ms) + 250ms);
-}
-
-.pillar-item.is-visible .pillar-icon svg :is(path, circle) {
-  stroke-dashoffset: 0;
 }
 
 /* Scan flow --------------------------------------------------------------- */
@@ -846,10 +790,8 @@
   .marquee-row + .marquee-row {
     display: none;
   }
-  [data-tilt],
-  [data-magnetic] {
+  [data-tilt] {
     transform: none;
-    translate: none;
   }
   .flow-step {
     opacity: 1;
@@ -860,8 +802,7 @@
     transform: none;
     transition: none;
   }
-  .flow-icon .draw,
-  .pillar-icon svg :is(path, circle) {
+  .flow-icon .draw {
     stroke-dashoffset: 0;
     transition: none;
   }

@@ -146,7 +146,7 @@ function App() {
 
           <div className="header-actions">
             <ThemeToggle theme={theme} onToggle={toggleTheme} />
-            <a className="header-cta" href="#download" data-magnetic>
+            <a className="header-cta" href="#download">
               Get the app <Arrow diagonal />
             </a>
             <button
@@ -374,7 +374,6 @@ function App() {
             <div className="editorial-cards">
               <article
                 className="editorial-card"
-                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "0ms" } as CSSProperties}
               >
@@ -398,16 +397,13 @@ function App() {
 
               <article
                 className="editorial-card editorial-card-chart"
-                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "80ms" } as CSSProperties}
               >
                 <div className="editorial-chart-stage" aria-hidden="true">
                   <div className="editorial-chart-head">
                     <span>Last 7 days</span>
-                    <strong>
-                      <CountUp value={2.45} decimals={2} /> kg
-                    </strong>
+                    <strong>2.45 kg</strong>
                   </div>
                   <div className="editorial-chart-bars">
                     {[
@@ -418,16 +414,11 @@ function App() {
                       { day: "Fri", val: 58 },
                       { day: "Sat", val: 94, peak: true },
                       { day: "Sun", val: 72 },
-                    ].map((bar, i) => (
+                    ].map((bar) => (
                       <div key={bar.day} className="editorial-bar-col">
                         <span
                           className={`editorial-bar${bar.peak ? " is-peak" : ""}`}
-                          style={
-                            {
-                              "--bar-h": `${bar.val}%`,
-                              "--i": i,
-                            } as CSSProperties
-                          }
+                          style={{ "--bar-h": `${bar.val}%` } as CSSProperties}
                         />
                         <small>{bar.day}</small>
                       </div>
@@ -446,7 +437,6 @@ function App() {
 
               <article
                 className="editorial-card"
-                data-tilt
                 data-reveal="up"
                 style={{ "--reveal-delay": "160ms" } as CSSProperties}
               >
@@ -716,7 +706,6 @@ function App() {
                   <ReleaseInfo />
                   <a
                     className="button button-lime"
-                    data-magnetic
                     href="/apk/latest.apk"
                     download="WasteNot-latest.apk"
                   >
