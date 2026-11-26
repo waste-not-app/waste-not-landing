@@ -911,139 +911,6 @@
   }
 }
 
-/* Open source ------------------------------------------------------------ */
-.repo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-}
-
-.repo-card {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding: var(--space-5);
-  border-radius: var(--radius-summary);
-  background: var(--surface);
-  border: 1px solid var(--divider);
-  box-shadow: var(--shadow-card);
-  color: var(--ink);
-}
-
-.repo-card:hover {
-  border-color: var(--primary);
-}
-
-.repo-code {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: var(--space-3);
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: var(--pine-start);
-  color: #d2ef69;
-  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-  font-size: 11.5px;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.repo-caret {
-  color: #9fcf9f;
-}
-
-/* Each snippet types itself out once its card is revealed. */
-.repo-typed {
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: clip;
-  clip-path: inset(0 100% 0 0);
-}
-
-.repo-card.is-visible .repo-typed {
-  clip-path: inset(0 0 0 0);
-  transition: clip-path calc(var(--chars) * 45ms) steps(var(--chars))
-    calc(var(--reveal-delay, 0ms) + 400ms);
-}
-
-.repo-code::after {
-  content: "";
-  width: 7px;
-  height: 14px;
-  background: #d2ef69;
-  animation: caretBlink 1s steps(2) infinite;
-}
-
-@keyframes caretBlink {
-  50% {
-    opacity: 0;
-  }
-}
-
-.repo-role {
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.repo-name {
-  font-size: 17px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  overflow-wrap: anywhere;
-}
-
-.repo-stack {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.repo-stack span {
-  padding: 3px 9px;
-  border-radius: 999px;
-  background: var(--primary-soft);
-  color: var(--on-primary-soft);
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.repo-link {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  margin-top: auto;
-  padding-top: var(--space-3);
-  color: var(--primary);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.repo-link .btn-arrow {
-  transition: translate 300ms var(--ease-out);
-}
-
-.repo-card:hover .repo-link .btn-arrow {
-  translate: 3px -3px;
-}
-
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
-
 /* Giant footer wordmark ------------------------------------------------ */
 .footer-wordmark {
   padding-top: var(--space-4);
@@ -1095,9 +962,6 @@
   .faq-head {
     position: static;
   }
-  .repo-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 @media (max-width: 600px) {
@@ -1111,9 +975,6 @@
   .bento-level {
     grid-column: auto;
   }
-  .repo-grid {
-    grid-template-columns: 1fr;
-  }
   .marquee {
     padding: 14px 0;
   }
@@ -1125,17 +986,10 @@
 
 /* Reduced motion: everything settles in its final state. --------------- */
 @media (prefers-reduced-motion: reduce) {
-  .hero-badge-dot::after,
-  .hero-chip,
   .marquee-track,
-  .seam-photo,
   .faq-answer,
-  .repo-code::after,
   .bento-offline.is-visible .queue-item {
     animation: none;
-  }
-  .repo-typed {
-    clip-path: none;
   }
   .marquee-track {
     flex-wrap: wrap;
