@@ -17,6 +17,11 @@ import { useMediaQuery, usePointerParallax, useScrollSteps } from "./hooks";
 import type { ScreenId } from "./types";
 import "./styles/global.css";
 
+/** Pauses scroll-synced step changes while a programmatic scroll runs. */
+function lockSteps(until: { current: number }, ms: number) {
+  until.current = performance.now() + ms;
+}
+
 function getInitialTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
   const stored = window.localStorage.getItem("wastenot-theme");
@@ -261,7 +266,10 @@ function App() {
                 <a
                   className="button button-primary"
                   href="#interface"
-                  onClick={() => setActiveScreen("ai")}
+                  onClick={() => {
+                    lockSteps(stepLockUntil, 1200);
+                    setActiveScreen("ai");
+                  }}
                 >
                   Try the app and AI demo <Arrow diagonal />
                 </a>
@@ -304,7 +312,16 @@ function App() {
                 className="screen-switcher"
                 role="tablist"
                 aria-label="Choose an Android screen"
+                style={
+                  {
+                    "--progress":
+                      (simulatorTabs.findIndex((t) => t.id === activeScreen) +
+                        1) /
+                      simulatorTabs.length,
+                  } as CSSProperties
+                }
               >
+                <span className="switcher-rail" aria-hidden="true" />
                 {simulatorTabs.map((tab, idx) => {
                   const active = activeScreen === tab.id;
                   return (
@@ -313,8 +330,12 @@ function App() {
                       type="button"
                       role="tab"
                       aria-selected={active}
+                      aria-controls="demo-phone"
+                      data-step={tab.id}
                       className={`switcher-item${active ? " is-active" : ""}`}
-                      onClick={() => setActiveScreen(tab.id)}
+                      onClick={(event) =>
+                        selectStep(tab.id, event.currentTarget)
+                      }
                     >
                       <span className="switcher-num">0{idx + 1}</span>
                       <div>
@@ -329,7 +350,10 @@ function App() {
 
             <div
               className="showcase-device"
-              data-reveal="scale"
+              id="demo-phone"
+              role="tabpanel"
+              aria-label="Interactive demo phone"
+              data-reveal="up"
               style={{ "--reveal-delay": "80ms" } as CSSProperties}
             >
               <AndroidScreen

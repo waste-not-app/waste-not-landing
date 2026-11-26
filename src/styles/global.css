@@ -371,16 +371,12 @@ button {
 @keyframes screenEnter {
   from {
     opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 10px, 0);
   }
 }
 
 .screen-pane {
-  animation: screenEnter 220ms var(--ease-standard);
+  animation: screenEnter 320ms var(--ease-out);
 }
 
 /* ==========================================================================
@@ -2311,6 +2307,7 @@ button {
 }
 
 .screen-switcher {
+  position: relative;
   margin-top: var(--space-6);
   display: flex;
   flex-direction: column;
