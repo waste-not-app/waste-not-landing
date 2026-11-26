@@ -2414,8 +2414,9 @@ button {
   }
 
   .screen-switcher {
-    gap: 0;
+    gap: min(16vh, 140px);
     padding-left: 28px;
+    padding-bottom: 12vh;
   }
 
   .screen-switcher::before,
@@ -2439,8 +2440,6 @@ button {
   }
 
   .switcher-item {
-    min-height: min(34vh, 300px);
-    align-content: center;
     transition:
       opacity 320ms var(--ease-standard),
       border-color var(--duration-fast) var(--ease-standard),
