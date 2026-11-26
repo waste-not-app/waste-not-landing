@@ -784,8 +784,6 @@ button {
 
 /* 3-Phone Fan */
 .hero-trio {
-  --px: 0;
-  --py: 0;
   margin-top: 56px;
   display: flex;
   align-items: center;
@@ -799,12 +797,6 @@ button {
   left: 50%;
   top: 47%;
   transform: translate(-50%, -50%);
-  translate: calc(var(--px) * -22px) calc(var(--py) * -14px);
-  rotate: calc(var(--px) * -1deg);
-  transition:
-    translate 900ms var(--ease-out),
-    rotate 900ms var(--ease-out);
-  animation: heroWEnter 1400ms var(--ease-out) 200ms backwards;
   width: min(1260px, 98vw);
   aspect-ratio: 773 / 546;
   z-index: 0;
@@ -1017,61 +1009,16 @@ button {
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
 }
 
-/* Hero stage: on load the side phones fan out from behind the center one.
-   Afterwards they drift with the pointer through the individual translate
-   property, which composes with transform and runs on the compositor. */
-@keyframes heroWEnter {
-  from {
-    opacity: 0;
-    scale: 0.92;
-  }
-}
-
-@keyframes trioCenterEnter {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 48px, 0);
-  }
-}
-
-@keyframes trioLeftEnter {
-  from {
-    opacity: 0;
-    transform: translateX(140px) scale(0.8);
-  }
-}
-
-@keyframes trioRightEnter {
-  from {
-    opacity: 0;
-    transform: translateX(-140px) scale(0.8);
-  }
-}
-
 .trio-center {
   position: relative;
   z-index: 3;
-  translate: calc(var(--px) * 6px) calc(var(--py) * 4px);
-  transition: translate 700ms var(--ease-out);
-  animation: trioCenterEnter 900ms var(--ease-out) 260ms backwards;
 }
 
 .trio-side {
   position: relative;
   z-index: 1;
   opacity: 1;
-  translate: calc(var(--px) * 14px) calc(var(--py) * 8px);
-  transition:
-    transform var(--duration-base) var(--ease-standard),
-    translate 800ms var(--ease-out);
-}
-
-.trio-left {
-  animation: trioLeftEnter 1000ms var(--ease-out) 520ms backwards;
-}
-
-.trio-right {
-  animation: trioRightEnter 1000ms var(--ease-out) 520ms backwards;
+  transition: transform var(--duration-base) var(--ease-standard);
 }
 
 .trio-side .phone {
@@ -3437,24 +3384,8 @@ button {
     transition: none;
   }
   .screen-pane,
-  .ai-scan-line,
-  .hero-w-backdrop,
-  .trio-center,
-  .trio-side {
+  .ai-scan-line {
     animation: none;
-  }
-  .rt-i,
-  .rt-accent,
-  .editorial-bar,
-  .switcher-rail {
-    transition: none;
-  }
-  .rt-i,
-  .editorial-bar {
-    transform: none;
-  }
-  .rt-accent {
-    background-size: 100% 0.14em;
   }
   body,
   a,
