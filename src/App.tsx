@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { AndroidScreen } from "./components/AndroidScreen";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
@@ -7,6 +13,7 @@ import { KineticText } from "./components/KineticText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { simulatorTabs } from "./data/screens";
+import { useMediaQuery, usePointerParallax, useScrollSteps } from "./hooks";
 import type { ScreenId } from "./types";
 import "./styles/global.css";
 
@@ -25,7 +32,32 @@ function App() {
   const headerRef = useRef<HTMLElement | null>(null);
   const [activeScreen, setActiveScreen] = useState<ScreenId>("home");
   const [selectedAction, setSelectedAction] = useState("Recycle");
-  const [heroHoverX, setHeroHoverX] = useState<number | null>(null);
+  const heroStageRef = useRef<HTMLDivElement | null>(null);
+  const stepLockUntil = useRef(0);
+  const stickyDemo = useMediaQuery("(min-width: 981px)");
+  usePointerParallax(heroStageRef);
+  const isStepLocked = useCallback(
+    () => performance.now() < stepLockUntil.current,
+    [],
+  );
+  const syncStep = useCallback((step: string) => {
+    setActiveScreen(step as ScreenId);
+  }, []);
+  useScrollSteps("[data-step]", stickyDemo, syncStep, isStepLocked);
+
+  const selectStep = (id: ScreenId, target?: HTMLElement) => {
+    setActiveScreen(id);
+    if (!stickyDemo || !target) return;
+    // Ignore the steps the smooth scroll passes on its way to the chosen one.
+    lockSteps(stepLockUntil, 900);
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    target.scrollIntoView({
+      block: "center",
+      behavior: reduced ? "auto" : "smooth",
+    });
+  };
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -239,19 +271,8 @@ function App() {
               </div>
             </div>
 
-            <div
-              className="hero-trio"
-              data-reveal="scale"
-              style={{ "--reveal-delay": "90ms" } as CSSProperties}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                if (rect.width > 0) {
-                  setHeroHoverX((e.clientX - rect.left) / rect.width);
-                }
-              }}
-              onMouseLeave={() => setHeroHoverX(null)}
-            >
-              <HeroWBackdrop hoverX={heroHoverX} />
+            <div className="hero-trio" ref={heroStageRef}>
+              <HeroWBackdrop />
               <div className="trio-side trio-left">
                 <AndroidScreen screen="ai" />
               </div>
