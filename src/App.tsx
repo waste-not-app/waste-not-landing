@@ -21,12 +21,7 @@ import { RevealText } from "./components/RevealText";
 import { ReleaseInfo } from "./components/ReleaseInfo";
 import { ThemeToggle } from "./components/ThemeToggle";
 import { simulatorTabs } from "./data/screens";
-import {
-  useMediaQuery,
-  usePointerParallax,
-  usePointerSurfaces,
-  useScrollSteps,
-} from "./hooks";
+import { usePointerSurfaces } from "./hooks";
 import type { ScreenId } from "./types";
 import "./styles/global.css";
 import "./styles/sections.css";
@@ -52,33 +47,7 @@ function App() {
   const [activeScreen, setActiveScreen] = useState<ScreenId>("home");
   const [selectedAction, setSelectedAction] = useState("Recycle");
   const heroStageRef = useRef<HTMLDivElement | null>(null);
-  const stepLockUntil = useRef(0);
-  const stickyDemo = useMediaQuery("(min-width: 981px)");
-  usePointerParallax(heroStageRef);
   usePointerSurfaces();
-  const isStepLocked = useCallback(
-    () => performance.now() < stepLockUntil.current,
-    [],
-  );
-  const syncStep = useCallback((step: string) => {
-    setActiveScreen(step as ScreenId);
-  }, []);
-  useScrollSteps("[data-step]", stickyDemo, syncStep, isStepLocked);
-
-  const selectStep = (id: ScreenId, target?: HTMLElement) => {
-    setActiveScreen(id);
-    if (!stickyDemo || !target) return;
-    // Ignore the steps the smooth scroll passes on its way to the chosen one.
-    lockSteps(stepLockUntil, 900);
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    target.scrollIntoView({
-      block: "center",
-      behavior: reduced ? "auto" : "smooth",
-    });
-  };
-
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     window.localStorage.setItem("wastenot-theme", theme);
@@ -274,12 +243,8 @@ function App() {
         <section className="hero" id="top">
           <div className="container">
             <div className="hero-centered" data-reveal="up">
-              <p className="hero-badge">
-                <span className="hero-badge-dot" aria-hidden="true" />
-                Android app with an AI scan
-              </p>
               <h1>
-                <RevealText
+                <KineticText
                   text="Good habits start with a single log."
                   accent="a single log."
                 />
@@ -307,30 +272,23 @@ function App() {
               </div>
             </div>
 
-            <div className="hero-trio" ref={heroStageRef}>
-              <HeroWBackdrop />
+            <div
+              className="hero-trio"
+              ref={heroStageRef}
+              data-reveal="scale"
+              style={{ "--reveal-delay": "90ms" } as CSSProperties}
+            >
+              <HeroWBackdrop stageRef={heroStageRef} />
               <div className="trio-side trio-left">
                 <AndroidScreen screen="ai" />
               </div>
 
-              <HeroPhone />
+              <div className="trio-center">
+                <AndroidScreen screen="home" />
+              </div>
 
               <div className="trio-side trio-right">
                 <AndroidScreen screen="stats" />
-              </div>
-
-              <div className="hero-chips" aria-hidden="true">
-                <span className="hero-chip chip-a">
-                  <span className="chip-icon">✓</span>
-                  Logged · Plastic 250 g
-                </span>
-                <span className="hero-chip chip-b">
-                  <span className="chip-icon lime">✦</span>2 items avoided
-                </span>
-                <span className="hero-chip chip-c">
-                  <span className="chip-icon">↑</span>
-                  Level 1 · 50 XP
-                </span>
               </div>
             </div>
           </div>
