@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type CSSProperties,
-} from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { AndroidScreen } from "./components/AndroidScreen";
 import { ApkQr } from "./components/ApkQr";
 import { Arrow } from "./components/Arrow";
@@ -22,11 +16,6 @@ import { usePointerSurfaces } from "./hooks";
 import type { ScreenId } from "./types";
 import "./styles/global.css";
 import "./styles/sections.css";
-
-/** Pauses scroll-synced step changes while a programmatic scroll runs. */
-function lockSteps(until: { current: number }, ms: number) {
-  until.current = performance.now() + ms;
-}
 
 function getInitialTheme(): "light" | "dark" {
   if (typeof window === "undefined") return "light";
@@ -255,11 +244,7 @@ function App() {
                 <a
                   className="button button-primary"
                   href="#interface"
-                  data-magnetic
-                  onClick={() => {
-                    lockSteps(stepLockUntil, 1200);
-                    setActiveScreen("ai");
-                  }}
+                  onClick={() => setActiveScreen("ai")}
                 >
                   Try the app and AI demo <Arrow diagonal />
                 </a>
@@ -295,30 +280,23 @@ function App() {
 
         <section className="section showcase-section" id="interface">
           <div className="container showcase-grid">
-            <div className="showcase-copy" data-reveal="up">
-              <p className="eyebrow">Explore the app</p>
+            <div className="showcase-copy" data-reveal="left">
+              <p className="eyebrow">
+                <KineticText text="Explore the app" />
+              </p>
               <h2>
-                <RevealText text="Every main feature, including the AI scan." />
+                <KineticText text="Every main feature, including the AI scan." />
               </h2>
               <p className="showcase-lede">
-                Scroll through the features, pick one, or tap the phone itself.
-                Every screen uses sample data.
+                Pick a screen below, or tap the navigation icons on the phone,
+                to walk through each feature, including the AI scan.
               </p>
 
               <div
                 className="screen-switcher"
                 role="tablist"
                 aria-label="Choose an Android screen"
-                style={
-                  {
-                    "--progress":
-                      (simulatorTabs.findIndex((t) => t.id === activeScreen) +
-                        1) /
-                      simulatorTabs.length,
-                  } as CSSProperties
-                }
               >
-                <span className="switcher-rail" aria-hidden="true" />
                 {simulatorTabs.map((tab, idx) => {
                   const active = activeScreen === tab.id;
                   return (
@@ -327,12 +305,8 @@ function App() {
                       type="button"
                       role="tab"
                       aria-selected={active}
-                      aria-controls="demo-phone"
-                      data-step={tab.id}
                       className={`switcher-item${active ? " is-active" : ""}`}
-                      onClick={(event) =>
-                        selectStep(tab.id, event.currentTarget)
-                      }
+                      onClick={() => setActiveScreen(tab.id)}
                     >
                       <span className="switcher-num">0{idx + 1}</span>
                       <div>
@@ -347,10 +321,7 @@ function App() {
 
             <div
               className="showcase-device"
-              id="demo-phone"
-              role="tabpanel"
-              aria-label="Interactive demo phone"
-              data-reveal="up"
+              data-reveal="scale"
               style={{ "--reveal-delay": "80ms" } as CSSProperties}
             >
               <AndroidScreen
