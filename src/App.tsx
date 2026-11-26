@@ -442,11 +442,16 @@ function App() {
                       { day: "Fri", val: 58 },
                       { day: "Sat", val: 94, peak: true },
                       { day: "Sun", val: 72 },
-                    ].map((bar) => (
+                    ].map((bar, i) => (
                       <div key={bar.day} className="editorial-bar-col">
                         <span
                           className={`editorial-bar${bar.peak ? " is-peak" : ""}`}
-                          style={{ "--bar-h": `${bar.val}%` } as CSSProperties}
+                          style={
+                            {
+                              "--bar-h": `${bar.val}%`,
+                              "--i": i,
+                            } as CSSProperties
+                          }
                         />
                         <small>{bar.day}</small>
                       </div>
