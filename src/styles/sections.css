@@ -865,6 +865,52 @@
   }
 }
 
+/* APK QR code ----------------------------------------------------------- */
+.install-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  width: 100%;
+  margin-bottom: var(--space-4);
+}
+
+.install-row .install-steps {
+  flex: 1;
+  margin: 0;
+}
+
+.qr-card {
+  display: none;
+  flex-shrink: 0;
+  margin: 0;
+  width: 132px;
+  text-align: center;
+}
+
+.apk-qr {
+  display: block;
+  width: 132px;
+  height: 132px;
+  border-radius: 14px;
+  border: 1px solid var(--divider);
+  box-shadow: var(--shadow-card);
+}
+
+.qr-card figcaption {
+  margin-top: var(--space-2);
+  font-size: 11px;
+  line-height: 15px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Only offer the QR where it helps: on a computer with a mouse. */
+@media (min-width: 981px) and (hover: hover) and (pointer: fine) {
+  .qr-card {
+    display: block;
+  }
+}
+
 /* Giant footer wordmark ------------------------------------------------ */
 .footer-wordmark {
   padding-top: var(--space-4);

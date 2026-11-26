@@ -6,6 +6,7 @@ import {
   type CSSProperties,
 } from "react";
 import { AndroidScreen } from "./components/AndroidScreen";
+import { ApkQr } from "./components/ApkQr";
 import { Arrow } from "./components/Arrow";
 import { Brand } from "./components/Brand";
 import { CountUp } from "./components/CountUp";
@@ -788,11 +789,19 @@ function App() {
                   >
                     Download the Android app <Arrow diagonal />
                   </a>
-                  <ol className="install-steps">
-                    <li>Download the APK on your Android phone.</li>
-                    <li>Open the file and allow installs from your browser.</li>
-                    <li>Open WasteNot and create your account.</li>
-                  </ol>
+                  <div className="install-row">
+                    <ol className="install-steps">
+                      <li>Download the APK on your Android phone.</li>
+                      <li>
+                        Open the file and allow installs from your browser.
+                      </li>
+                      <li>Open WasteNot and create your account.</li>
+                    </ol>
+                    <figure className="qr-card">
+                      <ApkQr />
+                      <figcaption>On a computer? Scan to download.</figcaption>
+                    </figure>
+                  </div>
                   <small>
                     Needs Android 11 or newer. The APK downloads straight from
                     the WasteNot server.
