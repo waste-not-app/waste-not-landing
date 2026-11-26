@@ -813,7 +813,6 @@ function App() {
           </div>
         </section>
         <Faq />
-        <OpenSource />
       </main>
 
       <footer className="footer">
@@ -836,7 +835,6 @@ function App() {
                 <a href="#about">About</a>
                 <a href="#faq">FAQ</a>
                 <a href="#download">Download for Android</a>
-                <a href="#open-source">Source code</a>
                 <a href="/privacy/">Privacy policy</a>
               </nav>
             </div>
