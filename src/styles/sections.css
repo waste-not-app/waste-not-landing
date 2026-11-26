@@ -103,8 +103,8 @@
   transform: perspective(1000px) rotateX(calc(var(--my, 0) * -5deg))
     rotateY(calc(var(--mx, 0) * 6deg));
   transition:
-    opacity 560ms var(--ease-out) var(--reveal-delay, 0ms),
-    translate 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    opacity 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    translate 720ms var(--ease-out) var(--reveal-delay, 0ms),
     transform 500ms var(--ease-out),
     border-color var(--duration-base) var(--ease-standard),
     background-color var(--duration-base) var(--ease-standard);
@@ -579,8 +579,8 @@
   background: var(--surface);
   border: 1px solid var(--divider);
   transition:
-    opacity 560ms var(--ease-out) var(--reveal-delay, 0ms),
-    translate 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    opacity 640ms var(--ease-out) var(--reveal-delay, 0ms),
+    translate 720ms var(--ease-out) var(--reveal-delay, 0ms),
     border-color var(--duration-base) var(--ease-standard),
     box-shadow var(--duration-base) var(--ease-standard);
 }

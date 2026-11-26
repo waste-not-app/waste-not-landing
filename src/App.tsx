@@ -139,8 +139,8 @@ function App() {
 
           <nav className="desktop-nav" aria-label="Main navigation">
             <a href="#interface">App &amp; AI</a>
-            <a href="#scan">How it works</a>
             <a href="#benefits">Benefits</a>
+            <a href="#about">About</a>
             <a href="#faq">FAQ</a>
           </nav>
 
@@ -200,11 +200,11 @@ function App() {
                 Benefits
               </a>
               <a
-                href="#scan"
+                href="#about"
                 tabIndex={menuOpen ? 0 : -1}
                 onClick={() => setMenuOpen(false)}
               >
-                How it works
+                About
               </a>
               <a
                 href="#faq"
